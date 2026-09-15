@@ -1,0 +1,29 @@
+# =====================================================================
+# Reportes BDATx - Dependencias de Python
+# ---------------------------------------------------------------------
+# Instalar todo de una vez desde la raíz del proyecto con:
+#
+#     pip install -r requirements.txt
+#
+# Probado con Python 3.13 sobre Windows.
+# =====================================================================
+
+# --- Conexión a PostgreSQL -------------------------------------------------
+# Driver que usa el programa para leer la base BDATx.
+# Se usa la variante "binary" porque ya viene compilada: NO requiere
+# instalar compiladores de C ni las cabeceras de PostgreSQL en Windows.
+psycopg2-binary>=2.9.9
+
+# --- Manejo de datos y archivos Excel --------------------------------------
+pandas>=2.2
+openpyxl>=3.1
+XlsxWriter>=3.2
+
+# --- Descarga de la base desde la API --------------------------------------
+requests>=2.31
+
+# --- Generación de informes en Word (.docx) --------------------------------
+python-docx>=1.1
+
+# --- Conversión de Word a PDF (solo Windows, usa Microsoft Word) -----------
+pywin32>=308

@@ -1,0 +1,10 @@
+# Credenciales y configuracion local
+.env
+
+# Python
+__pycache__/
+*.pyc
+
+# Reportes generados
+docs/
+.aider*

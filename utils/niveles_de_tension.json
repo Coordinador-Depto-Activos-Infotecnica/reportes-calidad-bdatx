@@ -1,0 +1,69 @@
+{
+  "relacion_tension_letra": [
+    {
+      "clasificacion": "Extra Alta Tensión",
+      "tension": "1000 kV",
+      "letra": "M"
+    },
+    {
+      "clasificacion": "Extra Alta Tensión",
+      "tension": "750 kV",
+      "letra": "U"
+    },
+    {
+      "clasificacion": "Extra Alta Tensión",
+      "tension": "500 kV",
+      "letra": "K"
+    },
+    {
+      "clasificacion": "Extra Alta Tensión",
+      "tension": "345 kV",
+      "letra": "L"
+    },
+    {
+      "clasificacion": "Alta Tensión",
+      "tension": "220 kV",
+      "letra": "J"
+    },
+    {
+      "clasificacion": "Alta Tensión",
+      "tension": "154 kV",
+      "letra": "A"
+    },
+    {
+      "clasificacion": "Alta Tensión",
+      "tension": "121 kV",
+      "letra": "Q"
+    },
+    {
+      "clasificacion": "Alta Tensión",
+      "tension": "100 - 110 kV",
+      "letra": "H"
+    },
+    {
+      "clasificacion": "Alta Tensión",
+      "tension": "66 - 69 kV",
+      "letra": "B"
+    },
+    {
+      "clasificacion": "Alta Tensión",
+      "tension": "33 - 44 kV",
+      "letra": "F"
+    },
+    {
+      "clasificacion": "Media Tensión",
+      "tension": "20 - 23 kV",
+      "letra": "E"
+    },
+    {
+      "clasificacion": "Media Tensión",
+      "tension": "11 - 15 kV",
+      "letra": "C"
+    },
+    {
+      "clasificacion": "Media Tensión",
+      "tension": "2,4 - 6,6 kV",
+      "letra": "D"
+    }
+  ]
+}

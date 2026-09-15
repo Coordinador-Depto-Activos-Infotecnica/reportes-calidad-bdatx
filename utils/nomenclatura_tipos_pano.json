@@ -1,0 +1,36 @@
+{
+  "tipos_pano": [
+    {
+      "codigo": "S",
+      "descripcion": "Sección de Barra / Acoplador"
+    },
+    {
+      "codigo": "R",
+      "descripcion": "Transferencia"
+    },
+    {
+      "codigo": "T",
+      "descripcion": "Transformador o Autotransformador (T1, T2, etc.)"
+    },
+    {
+      "codigo": "G",
+      "descripcion": "Generador (G1, G2, etc.)"
+    },
+    {
+      "codigo": "Z",
+      "descripcion": "Reactor (Z1, Z2, etc.)"
+    },
+    {
+      "codigo": "CS",
+      "descripcion": "Compensación Serie"
+    },
+    {
+      "codigo": "CE",
+      "descripcion": "Banco de Condensadores"
+    },
+    {
+      "codigo": "SA,SSAA",
+      "descripcion": "Auxiliar"
+    }
+  ]
+}

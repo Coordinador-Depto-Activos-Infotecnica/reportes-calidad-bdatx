@@ -1,0 +1,455 @@
+{
+  "nodos_instalaciones": [
+    "api_barra",
+    "api_camara",
+    "api_casaserviciosgenerales",
+    "api_estacionrepetidora",
+    "api_pano",
+    "api_torre",
+    "api_marcolinea",
+    "api_patiomufas"
+  ],
+  "tablas_analizar": [
+    {
+      "tablas_postgres": "api_accesorioestructuralineaaerea",
+      "conexion1": "nodo_estructura_id"
+    },
+    {
+      "tablas_postgres": "api_accesorioestructuralineasubterranea",
+      "conexion1": "nodo_estructura_id"
+    },
+    {
+      "tablas_postgres": "api_accesorioestructurasubestacion",
+      "conexion1": "estructura_ssee_id"
+    },
+    {
+      "tablas_postgres": "api_accesoriovano",
+      "conexion1": "vano_id"
+    },
+    {
+      "tablas_postgres": "api_aislador",
+      "conexion1": "nodo_id"
+    },
+    {
+      "tablas_postgres": "api_amortiguador",
+      "conexion1": "vano_id"
+    },
+    {
+      "tablas_postgres": "api_armario",
+      "conexion1": "nodo_id"
+    },
+    {
+      "tablas_postgres": "api_bancobaterias",
+      "conexion1": "casa_servicios_generales_id"
+    },
+    {
+      "tablas_postgres": "api_bancocondensador",
+      "conexion1": "nodo_id"
+    },
+    {
+      "tablas_postgres": "api_barra",
+      "conexion1": "patio_subestacion_id"
+    },
+    {
+      "tablas_postgres": "api_boyasenalizacion",
+      "conexion1": "cable_guardia_id"
+    },
+    {
+      "tablas_postgres": "api_cableguardia",
+      "conexion1": "vano_id"
+    },
+    {
+      "tablas_postgres": "api_camara",
+      "conexion1": "linea_id"
+    },
+    {
+      "tablas_postgres": "api_casaserviciosgenerales",
+      "conexion1": "subestacion_id"
+    },
+    {
+      "tablas_postgres": "api_celda",
+      "conexion1": "nodo_id"
+    },
+    {
+      "tablas_postgres": "api_circuito",
+      "conexion1": "linea_id"
+    },
+    {
+      "tablas_postgres": "api_compensadoractivo",
+      "conexion1": "nodo_id"
+    },
+    {
+      "tablas_postgres": "api_compensadorestaticoreactivo",
+      "conexion1": "nodo_id"
+    },
+    {
+      "tablas_postgres": "api_condensadoracoplamiento",
+      "conexion1": "nodo_id"
+    },
+    {
+      "tablas_postgres": "api_condensadorserie",
+      "conexion1": "nodo_id"
+    },
+    {
+      "tablas_postgres": "api_condensadorsincrono",
+      "conexion1": "nodo_id"
+    },
+    {
+      "tablas_postgres": "api_conductor",
+      "conexion1": "vano_id"
+    },
+    {
+      "tablas_postgres": "api_conexiontierra",
+      "conexion1": "nodo_id"
+    },
+    {
+      "tablas_postgres": "api_controladorbahia",
+      "conexion1": "armario_id"
+    },
+    {
+      "tablas_postgres": "api_desconectador",
+      "conexion1": "nodo_id"
+    },
+    {
+      "tablas_postgres": "api_dispositivoreconexion",
+      "conexion1": "nodo_id"
+    },
+    {
+      "tablas_postgres": "api_elementocomunarmario",
+      "conexion1": "armario_id"
+    },
+    {
+      "tablas_postgres": "api_elementocomunpano",
+      "conexion1": "pano_id"
+    },
+    {
+      "tablas_postgres": "api_elementocomunpatiossee",
+      "conexion1": "patio_subestacion_id"
+    },
+    {
+      "tablas_postgres": "api_elementocomunssee",
+      "conexion1": "subestacion_id"
+    },
+    {
+      "tablas_postgres": "api_elementocomunssggcaseta",
+      "conexion1": "nodo_id"
+    },
+    {
+      "tablas_postgres": "api_equipocomunicacion",
+      "conexion1": "armario_id"
+    },
+    {
+      "tablas_postgres": "api_equipommoo",
+      "conexion1": "armario_id"
+    },
+    {
+      "tablas_postgres": "api_equipooplat",
+      "conexion1": "armario_id"
+    },
+    {
+      "tablas_postgres": "api_espaciador",
+      "conexion1": "vano_id"
+    },
+    {
+      "tablas_postgres": "api_estacionrepetidora",
+      "conexion1": "tramo_id"
+    },
+    {
+      "tablas_postgres": "api_estructuraestacionrepetidora",
+      "conexion1": "nodo_id"
+    },
+    {
+      "tablas_postgres": "api_generadorenergia",
+      "conexion1": "casa_servicios_generales_id"
+    },
+    {
+      "tablas_postgres": "api_interruptor",
+      "conexion1": "nodo_id"
+    },
+    {
+      "tablas_postgres": "api_monitorlinea",
+      "conexion1": "vano_id"
+    },
+    {
+      "tablas_postgres": "api_mufa",
+      "conexion1": "nodo_id"
+    },
+    {
+      "tablas_postgres": "api_multiplexador",
+      "conexion1": "armario_id"
+    },
+    {
+      "tablas_postgres": "api_otroelementosistemaproteccion",
+      "conexion1": "armario_id"
+    },
+    {
+      "tablas_postgres": "api_otroelementotelecomunicacion",
+      "conexion1": "armario_id"
+    },
+    {
+      "tablas_postgres": "api_panelantirruido",
+      "conexion1": "subestacion_id"
+    },
+    {
+      "tablas_postgres": "api_pano",
+      "conexion1": "patio_subestacion_id"
+    },
+    {
+      "tablas_postgres": "api_pararrayo",
+      "conexion1": "nodo_id"
+    },
+    {
+      "tablas_postgres": "api_pararrayomufa",
+      "conexion1": "mufa_id"
+    },
+    {
+      "tablas_postgres": "api_patiosubestacion",
+      "conexion1": "subestacion_id"
+    },
+    {
+      "tablas_postgres": "api_reactor",
+      "conexion1": "nodo_id"
+    },
+    {
+      "tablas_postgres": "api_seccionbarra",
+      "conexion1": "barra_id"
+    },
+    {
+      "tablas_postgres": "api_sistemarespaldoenergia",
+      "conexion1": "casa_servicios_generales_id"
+    },
+    {
+      "tablas_postgres": "api_tablero",
+      "conexion1": "nodo_id"
+    },
+    {
+      "tablas_postgres": "api_torre",
+      "conexion1": "linea_id"
+    },
+    {
+      "tablas_postgres": "api_trampaonda",
+      "conexion1": "nodo_id"
+    },
+    {
+      "tablas_postgres": "api_transformadorcorriente",
+      "conexion1": "nodo_id"
+    },
+    {
+      "tablas_postgres": "api_transformadorpotencial",
+      "conexion1": "nodo_id"
+    },
+    {
+      "tablas_postgres": "api_transformadorssaa",
+      "conexion1": "nodo_id"
+    },
+    {
+      "tablas_postgres": "api_transformadorzigzag",
+      "conexion1": "nodo_id"
+    },
+    {
+      "tablas_postgres": "api_bienequipovehiculo",
+      "conexion1": "subestacion_id"
+    },
+    {
+      "tablas_postgres": "api_marcolinea",
+      "conexion1": "linea_id",
+      "conexion2": "nodo_ssee_id"
+    },
+    {
+      "tablas_postgres": "api_medidor",
+      "conexion1": "armario_id",
+      "conexion2": "nodo_id"
+    },
+    {
+      "tablas_postgres": "api_otroelementosistemacontrol",
+      "conexion1": "armario_id",
+      "conexion2": "pano_id"
+    },
+    {
+      "tablas_postgres": "api_patiomufas",
+      "conexion1": "nodo_id",
+      "conexion2": "nodo_ssee_id"
+    },
+    {
+      "tablas_postgres": "api_releproteccion",
+      "conexion1": "nodo_id",
+      "conexion2": "armario_id"
+    },
+    {
+      "tablas_postgres": "api_teleproteccion",
+      "conexion1": "rele_proteccion_id",
+      "conexion2": "armario_id"
+    },
+    {
+      "tablas_postgres": "api_transformador2d",
+      "conexion1": "nodo1_id",
+      "conexion2": "nodo2_id"
+    },
+    {
+      "tablas_postgres": "api_transformador3d",
+      "conexion1": "nodo1_id",
+      "conexion2": "nodo2_id",
+      "conexion3": "nodo3_id"
+    },
+    {
+      "tablas_postgres": "api_vano",
+      "conexion1": "nodo1_id",
+      "conexion2": "nodo2_id",
+      "conexion3": "tramo_id"
+    },
+    {
+      "tablas_postgres": "api_tramo",
+      "conexion1": "circuito_id",
+      "conexion2": "nodo1_id",
+      "conexion3": "nodo2_id"
+    },
+    {
+      "tablas_postgres": "api_tunel",
+      "conexion1": "nodo1_id",
+      "conexion2": "nodo2_id",
+      "conexion3": "subestacion_id",
+      "conexion4": "tramo_id"
+    },
+    {
+      "tablas_postgres": "api_mitigacionambiental",
+      "conexion1": "declaracion_estudio_ambiental_id"
+    }
+  ],
+  "diccionario_tabla_relacion": [
+    {
+      "conexion": "nodo_estructura_id",
+      "tabla_relacion": "tabla_unificada_nodos",
+      "col_relacion": "nodo_id"
+    },
+    {
+      "conexion": "estructura_ssee_id",
+      "tabla_relacion": "api_estructurasubestacion",
+      "col_relacion": "id"
+    },
+    {
+      "conexion": "vano_id",
+      "tabla_relacion": "api_vano",
+      "col_relacion": "id"
+    },
+    {
+      "conexion": "nodo_id",
+      "tabla_relacion": "tabla_unificada_nodos",
+      "col_relacion": "nodo_id"
+    },
+    {
+      "conexion": "casa_servicios_generales_id",
+      "tabla_relacion": "api_casaserviciosgenerales",
+      "col_relacion": "id"
+    },
+    {
+      "conexion": "patio_subestacion_id",
+      "tabla_relacion": "api_patiosubestacion",
+      "col_relacion": "id"
+    },
+    {
+      "conexion": "cable_guardia_id",
+      "tabla_relacion": "api_cableguardia",
+      "col_relacion": "id"
+    },
+    {
+      "conexion": "linea_id",
+      "tabla_relacion": "api_linea",
+      "col_relacion": "id"
+    },
+    {
+      "conexion": "subestacion_id",
+      "tabla_relacion": "api_subestacion",
+      "col_relacion": "id"
+    },
+    {
+      "conexion": "armario_id",
+      "tabla_relacion": "api_armario",
+      "col_relacion": "id"
+    },
+    {
+      "conexion": "declaracionestudioambiental_id",
+      "tabla_relacion": "api_declaracionestudioambiental",
+      "col_relacion": "id"
+    },
+    {
+      "conexion": "pano_id",
+      "tabla_relacion": "api_pano",
+      "col_relacion": "id"
+    },
+    {
+      "conexion": "tramo_id",
+      "tabla_relacion": "api_tramo",
+      "col_relacion": "id"
+    },
+    {
+      "conexion": "sistema_electrico_id",
+      "tabla_relacion": "api_sistemaelectrico",
+      "col_relacion": "id"
+    },
+    {
+      "conexion": "datasheet_type_id",
+      "tabla_relacion": "api_datasheettype",
+      "col_relacion": "id"
+    },
+    {
+      "conexion": "nodo_ssee_id",
+      "tabla_relacion": "tabla_unificada_nodos",
+      "col_relacion": "nodo_id"
+    },
+    {
+      "conexion": "declaracion_estudio_ambiental_id",
+      "tabla_relacion": "api_declaracionestudioambiental",
+      "col_relacion": "id"
+    },
+    {
+      "conexion": "tipo_oocc_id",
+      "tabla_relacion": "api_tipooocc",
+      "col_relacion": "id"
+    },
+    {
+      "conexion": "barra_id",
+      "tabla_relacion": "api_barra",
+      "col_relacion": "id"
+    },
+    {
+      "conexion": "mufa_id",
+      "tabla_relacion": "api_mufa",
+      "col_relacion": "id"
+    },
+    {
+      "conexion": "sistema_interconectado_id",
+      "tabla_relacion": "api_sistemainterconectado",
+      "col_relacion": "id"
+    },
+    {
+      "conexion": "rele_proteccion_id",
+      "tabla_relacion": "api_releproteccion",
+      "col_relacion": "id"
+    },
+    {
+      "conexion": "nodo1_id",
+      "tabla_relacion": "tabla_unificada_nodos",
+      "col_relacion": "nodo_id"
+    },
+    {
+      "conexion": "nodo2_id",
+      "tabla_relacion": "tabla_unificada_nodos",
+      "col_relacion": "nodo_id"
+    },
+    {
+      "conexion": "nodo3_id",
+      "tabla_relacion": "tabla_unificada_nodos",
+      "col_relacion": "nodo_id"
+    },
+    {
+      "conexion": "circuito_id",
+      "tabla_relacion": "api_circuito",
+      "col_relacion": "id"
+    },
+    {
+      "conexion": "declaracion_estudio_ambiental_id",
+      "tabla_relacion": "api_declaracionestudioambiental",
+      "col_relacion": "id"
+    }
+  ]
+}

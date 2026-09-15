@@ -1,0 +1,287 @@
+[
+  {
+    "instalacion": "Subestaciones",
+    "prefijo": ["S/E"],
+    "tabla_psql": "api_subestacion"
+  },
+  {
+    "instalacion": "Elementos Comunes de Subestación",
+    "prefijo": ["EC"],
+    "tabla_psql": "api_elementocomunssee"
+  },
+  {
+    "instalacion": "Patios de Subestación",
+    "prefijo": ["PT"],
+    "tabla_psql": "api_patiosubestacion"
+  },
+  {
+    "instalacion": "Elementos Comunes de Patios",
+    "prefijo": ["EC"],
+    "tabla_psql": "api_elementocomunpatiossee"
+  },
+  {
+    "instalacion": "Barras",
+    "prefijo": ["BA"],
+    "tabla_psql": "api_barra"
+  },
+  {
+    "instalacion": "Paños",
+    "prefijo": ["PA"],
+    "tabla_psql": "api_pano"
+  },
+  {
+    "instalacion": "Elementos Comunes de Paños",
+    "prefijo": ["EC"],
+    "tabla_psql": "api_elementocomunpano"
+  },
+  {
+    "instalacion": "Transformadores de Dos Devanados",
+    "prefijo": ["T2D"],
+    "tabla_psql": "api_transformador2d"
+  },
+  {
+    "instalacion": "Transformadores de Tres Devanados",
+    "prefijo": ["T3D"],
+    "tabla_psql": "api_transformador3d"
+  },
+  {
+    "instalacion": "Transformadores Zigzag / Reactores de Puesta a Tierra",
+    "prefijo": ["TZ"],
+    "tabla_psql": "api_transformadorzigzag"
+  },
+  {
+    "instalacion": "Transformadores de Servicios Auxiliares",
+    "prefijo": ["TSA"],
+    "tabla_psql": "api_transformadorssaa"
+  },
+  {
+    "instalacion": "Celdas de Media Tensión",
+    "prefijo": ["CM"],
+    "tabla_psql": "api_celda"
+  },
+  {
+    "instalacion": "Interruptores de Maniobra / Potencia",
+    "prefijo": ["IM"],
+    "tabla_psql": "api_interruptor"
+  },
+  {
+    "instalacion": "Reconectadores",
+    "prefijo": ["REC"],
+    "tabla_psql": "api_dispositivoreconexion"
+  },
+  {
+    "instalacion": "Desconectadores",
+    "prefijo": ["DES"],
+    "tabla_psql": "api_desconectador"
+  },
+  {
+    "instalacion": "Transformadores de Corriente",
+    "prefijo": ["TC"],
+    "tabla_psql": "api_transformadorcorriente"
+  },
+  {
+    "instalacion": "Transformadores de Potencial",
+    "prefijo": ["TP"],
+    "tabla_psql": "api_transformadorpotencial"
+  },
+  {
+    "instalacion": "Pararrayos",
+    "prefijo": ["PR"],
+    "tabla_psql": "api_pararrayo"
+  },
+  {
+    "instalacion": "Trampas de Ondas",
+    "prefijo": ["TO"],
+    "tabla_psql": "api_trampaonda"
+  },
+  {
+    "instalacion": "Aisladores de Pedestal",
+    "prefijo": ["AP"],
+    "tabla_psql": "api_aislador"
+  },
+  {
+    "instalacion": "Condensadores Síncronos",
+    "prefijo": ["CSi"],
+    "tabla_psql": "api_condensadorsincrono"
+  },
+  {
+    "instalacion": "Compensadores Activos",
+    "prefijo": ["CA"],
+    "tabla_psql": "api_compensadoractivo"
+  },
+  {
+    "instalacion": "Compensadores Series",
+    "prefijo": ["CS"],
+    "tabla_psql": "api_condensadorserie"
+  },
+  {
+    "instalacion": "Compensadores Estáticos de Reactivos",
+    "prefijo": ["STATCOM", "SVC"],
+    "tabla_psql": "api_compensadorestaticoreactivo"
+  },
+  {
+    "instalacion": "Condensadores de Acoplamiento",
+    "prefijo": ["COAC"],
+    "tabla_psql": "api_condensadoracoplamiento"
+  },
+  {
+    "instalacion": "Bancos de Condensadores",
+    "prefijo": ["BC"],
+    "tabla_psql": "api_bancocondensador"
+  },
+  {
+    "instalacion": "Reactores",
+    "prefijo": ["RE"],
+    "tabla_psql": "api_reactor"
+  },
+  {
+    "instalacion": "Salas de Servicios Generales y Casetas",
+    "prefijo": ["SG", "SC", "CA", "SS", "GG", "ER","OE"],
+    "tabla_psql": "api_casaserviciosgenerales"
+  },
+  {
+    "instalacion": "Elementos Comunes de Salas / Casetas",
+    "prefijo": [],
+    "tabla_psql": "api_elementocomunssggcaseta"
+  },
+  {
+    "instalacion": "Armarios, Gabinetes y Tableros",
+    "prefijo": ["AR", "TB", "GA"],
+    "tabla_psql": "api_armario"
+  },
+  {
+    "instalacion": "Elementos Comunes de Armarios",
+    "prefijo": ["EC"],
+    "tabla_psql": "api_elementocomunarmario"
+  },
+  {
+    "instalacion": "Tableros (No de control/protección)",
+    "prefijo": ["TB"],
+    "tabla_psql": "api_tablero"
+  },
+  {
+    "instalacion": "Sistemas de Respaldo de Energía",
+    "prefijo": ["CB", "BB", "GE"],
+    "tabla_psql": "api_sistemarespaldoenergia"
+  },
+  {
+    "instalacion": "Medidores",
+    "prefijo": ["MD"],
+    "tabla_psql": "api_medidor"
+  },
+  {
+    "instalacion": "Sistemas de Protección",
+    "prefijo": ["SP"],
+    "tabla_psql": "api_releproteccion"
+  },
+  {
+    "instalacion": "Teleprotecciones",
+    "prefijo": ["TLP"],
+    "tabla_psql": "api_teleproteccion"
+  },
+  {
+    "instalacion": "Controladores de Bahía",
+    "prefijo": ["CP"],
+    "tabla_psql": "api_controladorbahia"
+  },
+  {
+    "instalacion": "Equipos Principales de Comunicación",
+    "prefijo": ["EPC"],
+    "tabla_psql": "api_equipocomunicacion"
+  },
+  {
+    "instalacion": "Estaciones Repetidoras",
+    "prefijo": ["ER"],
+    "tabla_psql": "api_estacionrepetidora"
+  },
+  {
+    "instalacion": "Líneas de Transmisión",
+    "prefijo": ["LT"],
+    "tabla_psql": "api_linea"
+  },
+  {
+    "instalacion": "Circuitos",
+    "prefijo": ["CTO"],
+    "tabla_psql": "api_circuito"
+  },
+  {
+    "instalacion": "Tramos",
+    "prefijo": ["TMO"],
+    "tabla_psql": "api_tramo"
+  },
+  {
+    "instalacion": "Vanos",
+    "prefijo": ["VN"],
+    "tabla_psql": "api_vano"
+  },
+  {
+    "instalacion": "Accesorios Vanos",
+    "prefijo": ["ACC"],
+    "tabla_psql": "api_accesoriovano"
+  },
+  {
+    "instalacion": "Túneles",
+    "prefijo": ["TN"],
+    "tabla_psql": "api_tunel"
+  },
+  {
+    "instalacion": "Estructuras de Subestación",
+    "prefijo": ["EST", "SUE", "MB", "ML","MP"],
+    "tabla_psql": "api_estructurasubestacion"
+  },
+  {
+    "instalacion": "Accesorios Estructuras de Subestación",
+    "prefijo": ["ACC"],
+    "tabla_psql": "api_accesorioestructurasubestacion"
+  },
+  {
+    "instalacion": "Torres",
+    "prefijo": ["TOR", "POS", "POR"],
+    "tabla_psql": "api_torre"
+  },
+  {
+    "instalacion": "Accesorios Estructuras de Líneas Aéreas",
+    "prefijo": ["ACC"],
+    "tabla_psql": "api_accesorioestructuralineaaerea"
+  },
+  {
+    "instalacion": "Cámaras",
+    "prefijo": ["CAM"],
+    "tabla_psql": "api_camara"
+  },
+  {
+    "instalacion": "Accesorios Estructuras de Líneas Subterráneas",
+    "prefijo": ["ACC"],
+    "tabla_psql": "api_accesorioestructuralineasubterranea"
+  },
+  {
+    "instalacion": "Patio de Mufas",
+    "prefijo": ["PM"],
+    "tabla_psql": "api_patiomufas"
+  },
+  {
+    "instalacion": "Mufas",
+    "prefijo": ["MU"],
+    "tabla_psql": "api_mufa"
+  },
+  {
+    "instalacion": "Obras Civiles",
+    "prefijo": ["OC"],
+    "tabla_psql": "api_oocc"
+  },
+  {
+    "instalacion": "Servidumbres",
+    "prefijo": ["SERV","TERR"],
+    "tabla_psql": "api_servidumbre"
+  },
+  {
+    "instalacion": "Estudios de Impacto Ambiental",
+    "prefijo": ["EIA"],
+    "tabla_psql": "api_declaracionestudioambiental"
+  },
+  {
+    "instalacion": "Mitigaciones Ambientales",
+    "prefijo": ["MTA"],
+    "tabla_psql": "api_mitigacionambiental"
+  }
+]
