@@ -11,7 +11,6 @@ Salida: docs/ReporteExcelEmpresa/<aaaammdd_hhmmss>/<empresa>.xlsx
 import os
 import sys
 import re
-import hashlib
 import warnings
 from datetime import datetime
 
@@ -47,8 +46,7 @@ TIPO_INSTALACION_A_TABLA = {
     "accesorios-vanos": "api_accesoriovano",
 }
 
-# Catálogo canónico de reglas: refleja exactamente la estructura de
-# criterios-revision/criterio_revision_validacion.md (tres grupos con subcategorías).
+# Catálogo canónico de reglas: agrupa los códigos en tres grupos con subcategorías.
 CATALOGO = [
     {"grupo": "General", "subcategoria": "Duplicidad por nombre",
      "codigos": ["NOMBRE_DUPLICADO"]},
@@ -494,21 +492,6 @@ def _normalizar_id(v):
 normalizar_id = _normalizar_id
 
 
-def hash_error(tipo, id_activo, observacion):
-    cadena = f"{clean(tipo).strip()}|{_normalizar_id(id_activo)}|{clean(observacion).strip()}"
-    return hashlib.sha256(cadena.encode("utf-8")).hexdigest()
-
-
-def cargar_hashes_justificados():
-    conn = psycopg2.connect(**config.DB_ERRORES_CONN)
-    try:
-        cur = conn.cursor()
-        cur.execute("SELECT error_hash FROM auditoria_errores WHERE justificado")
-        return {r[0] for r in cur.fetchall()}
-    finally:
-        conn.close()
-
-
 def _cargar_decreto_map(conn):
     cur = conn.cursor()
     cur.execute("SELECT id, name FROM api_decreto")
@@ -578,23 +561,7 @@ def agregar_decreto(df):
     return df
 
 
-def _filtrar_justificados(df):
-    if df.empty:
-        return df
-    justificados = cargar_hashes_justificados()
-    if not justificados:
-        return df
-    hashes = pd.Series(
-        [
-            hash_error(t, i, o)
-            for t, i, o in zip(df["tipo_instalacion"], df["id"], df["observacion"])
-        ],
-        index=df.index,
-    )
-    return df[~hashes.isin(justificados)]
-
-
-def consolidar_observaciones(excluir_justificados=True):
+def consolidar_observaciones():
     cargadores = [
         ("analisis_desconectados", leer_analisis("analisis_desconectados.xlsx", "REGISTRO_DESCONECTADO", "Registro desconectado (relacionamiento fuera de operación)")),
         ("analisis_duplicados", leer_analisis("analisis_duplicados.xlsx", "NOMBRE_DUPLICADO", "Nombre duplicado dentro de la tabla")),
@@ -628,8 +595,6 @@ def consolidar_observaciones(excluir_justificados=True):
         lambda t: TIPO_INSTALACION_A_TABLA.get(t, t)
     )
     df["propietario_name"] = df["propietario_name"].replace("", "Sin empresa")
-    if excluir_justificados:
-        df = _filtrar_justificados(df)
     return df[COLUMNAS]
 
 

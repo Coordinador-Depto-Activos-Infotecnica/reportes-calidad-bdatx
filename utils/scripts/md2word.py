@@ -9,11 +9,11 @@ reglas horizontales y formato en línea (negrita, cursiva, código y enlaces).
 
 Uso:
     python utils/scripts/md2word.py
-    python utils/scripts/md2word.py "Resumen evaluación BDATx.md" [salida.docx] [--pdf]
+    python utils/scripts/md2word.py "documento.md" [salida.docx] [--pdf]
 
-Los .md/.txt se buscan en `criterios-revision/` y, si no se indica otra ruta de
-salida, el .docx se genera en `criterios-revision/generados/`. Con `--pdf` se
-convierte además a PDF (requiere MS Word instalado).
+Los .md/.txt se buscan en la raíz del proyecto y, si no se indica otra ruta de
+salida, el .docx se genera en `generados/`. Con `--pdf` se convierte además a
+PDF (requiere MS Word instalado).
 """
 
 import os
@@ -27,8 +27,8 @@ from docx.oxml.ns import qn
 from docx.shared import Pt
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-CRITERIOS_DIR = os.path.join(BASE_DIR, "criterios-revision")
-GENERADOS_DIR = os.path.join(CRITERIOS_DIR, "generados")
+BUSQUEDA_DIR = BASE_DIR
+GENERADOS_DIR = os.path.join(BASE_DIR, "generados")
 
 INLINE_RE = re.compile(
     r"(\[([^\]]+)\]\(([^)]+)\))"
@@ -237,12 +237,12 @@ def convertir(ruta_entrada, ruta_salida):
 
 
 def elegir_archivo():
-    archivos = sorted(f for f in os.listdir(CRITERIOS_DIR) if f.lower().endswith((".md", ".txt")))
+    archivos = sorted(f for f in os.listdir(BUSQUEDA_DIR) if f.lower().endswith((".md", ".txt")))
     for idx, nombre in enumerate(archivos, start=1):
         print(f"  {idx}. {nombre}")
     respuesta = input("Elige un número o escribe la ruta del archivo: ").strip().strip('"')
     if respuesta.isdigit() and 1 <= int(respuesta) <= len(archivos):
-        return os.path.join(CRITERIOS_DIR, archivos[int(respuesta) - 1])
+        return os.path.join(BUSQUEDA_DIR, archivos[int(respuesta) - 1])
     return respuesta
 
 

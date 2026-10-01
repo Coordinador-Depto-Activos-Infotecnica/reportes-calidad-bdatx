@@ -3,6 +3,7 @@
 # ---------------------------------------------------------------------
 # Instalar todo de una vez desde la raíz del proyecto con:
 #
+#     python -m pip install --upgrade pip
 #     pip install -r requirements.txt
 #
 # Probado con Python 3.13 sobre Windows.
@@ -14,8 +15,11 @@
 # instalar compiladores de C ni las cabeceras de PostgreSQL en Windows.
 psycopg2-binary>=2.9.9
 
-# --- Manejo de datos y archivos Excel --------------------------------------
+# --- Manejo de datos -------------------------------------------------------
 pandas>=2.2
+numpy>=1.26
+
+# --- Archivos Excel (lectura y escritura) ----------------------------------
 openpyxl>=3.1
 XlsxWriter>=3.2
 

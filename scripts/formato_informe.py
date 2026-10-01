@@ -2,12 +2,11 @@
 """
 Genera un informe Word y PDF por empresa con el formato de referencia
 (banner, tarjetas KPI y tres secciones), usando las observaciones consolidadas
-por reporte_observaciones_empresa.py (misma fuente que el Excel y BD_errores).
+por reporte_observaciones_empresa.py (misma fuente que el Excel por empresa).
 
 La agrupación de las reglas (Revisión General / Revisión Específica / Revisión
 de anexos Líneas y Subestaciones) proviene del catálogo canónico definido en
-reporte_observaciones_empresa.CATALOGO, que refleja
-criterios-revision/criterio_revision_validacion.md.
+reporte_observaciones_empresa.CATALOGO.
 """
 
 import os

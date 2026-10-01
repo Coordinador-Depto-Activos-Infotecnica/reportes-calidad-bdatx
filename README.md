@@ -1,6 +1,6 @@
 # Reportes BDATx
 
-Proyecto de **calidad de datos** para la base **BDATx** (Coordinador Eléctrico Nacional). Genera reportes de relacionamiento, consistencia y escritura de las instalaciones, agrupados por tabla y por empresa; produce informes Word/PDF por empresa y reportes de **sugerencias de cambio** accionables (correcciones de nombre y posibles relacionamientos).
+Proyecto de **calidad de datos** para la base **BDATx** (Coordinador Eléctrico Nacional). Genera reportes de relacionamiento, consistencia y escritura de las instalaciones, agrupados por tabla y por empresa; produce informes Word/PDF por empresa, un informe Word/PDF consolidado de toda la BDATx y reportes de **sugerencias de cambio** accionables (correcciones de nombre y posibles relacionamientos).
 
 > **Importante:** este proyecto está pensado para ejecutarse en **Windows**, porque usa Microsoft Word para convertir los informes `.docx` a `.pdf`.
 
@@ -19,6 +19,7 @@ Si nunca has programado, no te preocupes: sigue la sección **Instalación paso 
 7. [Salidas que genera](#salidas-que-genera)
 8. [Solución de problemas](#solución-de-problemas)
 9. [Notas técnicas](#notas-técnicas)
+10. [Repositorio y contacto](#repositorio-y-contacto)
 
 ---
 
@@ -93,11 +94,11 @@ Elige **una** de las dos opciones:
 - **Con Git** (si lo tienes instalado):
 
   ```powershell
-  git clone <URL-del-repositorio>
-  cd ReportesBDATx
+  git clone https://github.com/Coordinador-Depto-Activos-Infotecnica/reportes-calidad-bdatx.git
+  cd reportes-calidad-bdatx
   ```
 
-- **Sin Git**: abre la página del repositorio, pulsa el botón verde **Code → Download ZIP**, descomprime el archivo y abre una terminal dentro de la carpeta `ReportesBDATx`.
+- **Sin Git**: abre la página del repositorio <https://github.com/Coordinador-Depto-Activos-Infotecnica/reportes-calidad-bdatx>, pulsa el botón verde **Code → Download ZIP**, descomprime el archivo y abre una terminal dentro de la carpeta del proyecto.
 
 > Todos los comandos de aquí en adelante se ejecutan **dentro de la carpeta del proyecto**.
 
@@ -218,9 +219,30 @@ Notas importantes:
 python master_bdatx.py
 ```
 
-El flujo pregunta **el origen de la base BDATx** (`n` no cargar / `d` descargar la última desde la API / `a` cargar una base guardada anterior) y luego ejecuta en orden:
+Al ejecutarlo, el programa ofrece un menú:
 
-1. `carga_bdatx.py` — descarga la BD desde la API **o** carga una base guardada en `BASE_FOLDER`. Fija la fecha del snapshot en el comentario de la base (la usan los reportes).
+```
+¿Qué deseas ejecutar?
+  1 = Flujo completo (todos los criterios)                      [por defecto]
+  2 = Uno o más criterios + actualizar reportes
+  3 = Solo actualizar reportes (Excel/Word/PDF)
+```
+
+- **Modo 1 (completo)**: pregunta el **origen de la base BDATx** (`n` no cargar / `d` descargar la última desde la API / `a` cargar una base guardada) y ejecuta todas las revisiones y luego los reportes.
+- **Modo 2 (criterios)**: permite elegir revisiones numeradas (p. ej. `11`, `3,7`, `9-11` o `todos`) y luego actualiza los reportes. No pregunta el origen de la base (usa la base actual).
+- **Modo 3 (solo salidas)**: ejecuta únicamente los reportes (Excel/Word/PDF) usando los resultados vigentes en `docs/reporte/`.
+
+También admite ejecución no interactiva:
+
+```powershell
+python master_bdatx.py --listar        # lista las revisiones numeradas
+python master_bdatx.py --revision 9-11 # uno o varios criterios + reportes
+python master_bdatx.py --solo-salidas  # solo actualiza reportes
+```
+
+El flujo ejecuta, en orden:
+
+1. `carga_bdatx.py` — (opcional) descarga la BD desde la API **o** carga una base guardada en `BASE_FOLDER`. Fija la fecha del snapshot en el comentario de la base (la usan los reportes).
 2. `analisis_estse_oc_serv.py` — enriquecimiento de `oocc`, `estse` y `serv`.
 3. `analisis_duplicados_desconexiones.py` — reportes de desconectados, duplicados y conexión nula.
 4. `auditoria_lineas_metricas.py` — auditoría de la jerarquía de líneas.
@@ -231,10 +253,12 @@ El flujo pregunta **el origen de la base BDATx** (`n` no cargar / `d` descargar 
 9. `analisis_prefijo.py` — verificación de prefijos de nombre.
 10. `revision_abreviatura_torre.py` — abreviatura de línea en torres.
 11. `revision_abreviatura_vano.py` — abreviatura de línea en vanos.
-12. `proceso_excel.py` — calcula `porcentaje error` y actualiza el avance diario.
-13. `reporte_observaciones_empresa.py` — consolida las observaciones en Excel por empresa.
-14. `sugerencias_cambios.py` — sugerencias de cambio (simples y complejas).
-15. `formato_informe.py` — informes Word y PDF por empresa.
+12. `revision_documentos_datasheet.py` — documentos obligatorios del datasheet de subestaciones y líneas.
+13. `proceso_excel.py` — calcula `porcentaje error` y actualiza el avance diario.
+14. `reporte_observaciones_empresa.py` — consolida las observaciones en Excel por empresa.
+15. `sugerencias_cambios.py` — sugerencias de cambio (simples y complejas).
+16. `formato_informe.py` — informes Word y PDF por empresa.
+17. `informe_global.py` — informe Word/PDF consolidado de toda la BDATx y Excel resumen por empresa.
 
 ### Informes Word/PDF por empresa (independiente)
 
@@ -242,7 +266,20 @@ El flujo pregunta **el origen de la base BDATx** (`n` no cargar / `d` descargar 
 python scripts/formato_informe.py
 ```
 
-Genera un `.docx` y un `.pdf` por empresa en `docs/ArchivoReporteEmpresa/<AAAAMMDD_HHMMSS>_bd<AAAAMMDD>/{word,pdf}/`.
+Genera un `.docx` y un `.pdf` por empresa en `docs/ArchivoReporteEmpresa/<AAAAMMDD_HHMMSS>_bd<AAAAMMDD>/{word,pdf}/`. Las métricas cuentan **instalaciones observadas** (tipo de instalación + `id`), no hallazgos: una instalación con varias observaciones cuenta una sola vez.
+
+### Informe global BDATx (independiente)
+
+```powershell
+python scripts/informe_global.py
+```
+
+Genera, con las mismas métricas y secciones:
+
+- Un único `.docx` y `.pdf` consolidado de todas las empresas (`Alcance: BDATx`).
+- Un Excel `resumen_empresas.xlsx` con **una fila por empresa** (solo las que tienen hallazgos) y **una columna por métrica** (`Instalaciones observadas` y `% Error` de cada regla), más una fila `TOTAL BDATx`.
+
+Salida en `docs/ArchivoReporteGlobal/<AAAAMMDD_HHMMSS>_bd<AAAAMMDD>/{word,pdf}/BDATx_global.{docx,pdf}` y `.../resumen_empresas.xlsx`.
 
 ### Generar el archivo de abreviaturas de línea
 
@@ -251,6 +288,14 @@ Los análisis de abreviatura de torre y vano leen el archivo `utils/abreviatura_
 ```powershell
 python utils/scripts/lineas_abreviadas.py
 ```
+
+### Convertir un Markdown a Word (independiente)
+
+```powershell
+python utils/scripts/md2word.py "documento.md" --pdf
+```
+
+Convierte un `.md`/`.txt` a `.docx` (y, con `--pdf`, también a PDF) usando Microsoft Word. Si no se indica archivo, lo pide de forma interactiva.
 
 ### Ejecutar un script suelto
 
@@ -284,10 +329,12 @@ ReportesBDATx/
 │   ├── revision_herencia_nombre.py           # Herencia del nombre de la subestación
 │   ├── revision_abreviatura_torre.py         # Abreviatura de línea en torres
 │   ├── revision_abreviatura_vano.py          # Abreviatura de línea en vanos
+│   ├── revision_documentos_datasheet.py      # Documentos obligatorios del datasheet (anexos)
 │   ├── proceso_excel.py                      # % error + avance diario
 │   ├── reporte_observaciones_empresa.py      # Consolida observaciones en Excel por empresa
 │   ├── sugerencias_cambios.py                # Sugerencias de cambio (simples y complejas)
-│   └── formato_informe.py                    # Informe Word y PDF por empresa
+│   ├── formato_informe.py                    # Informe Word y PDF por empresa
+│   └── informe_global.py                     # Informe Word/PDF global + resumen Excel por empresa
 ├── utils/
 │   ├── prefijos.json                           # Prefijos por tipo de instalación
 │   ├── niveles_de_tension.json                 # Niveles de tensión y su letra
@@ -295,15 +342,18 @@ ReportesBDATx/
 │   ├── abreviaturas_ssee.json                  # Abreviaturas de nombres de subestación
 │   ├── abreviatura_linea.json                  # Abreviatura oficial por línea (generado)
 │   ├── relacionamiento_columnas_instalaciones.json  # Configuración de relacionamiento
+│   ├── esqueletos_instalaciones_json/          # Esqueletos por tipo (campos del datasheet)
 │   └── scripts/
-│       └── lineas_abreviadas.py                # Genera abreviatura_linea.json
+│       ├── lineas_abreviadas.py                # Genera abreviatura_linea.json
+│       └── md2word.py                          # Convierte un .md/.txt a Word (y PDF)
 └── docs/                      # Salidas (no versionadas)
     ├── reporte/               # Reportes sin fecha
     ├── historico/             # Reportes con fecha
     ├── avance/                # Avance diario (avance_error_diario.xlsx)
     ├── ReporteExcelEmpresa/   # Observaciones consolidadas por empresa (Excel)
     ├── SugerenciasCambios/    # Sugerencias de cambio por corrida
-    └── ArchivoReporteEmpresa/ # Informes Word/PDF por empresa (una carpeta por corrida)
+    ├── ArchivoReporteEmpresa/ # Informes Word/PDF por empresa (una carpeta por corrida)
+    └── ArchivoReporteGlobal/  # Informe Word/PDF global + resumen Excel por empresa
 ```
 
 ---
@@ -316,18 +366,21 @@ ReportesBDATx/
 | `analisis_estse_oc_serv.py` | Para `oocc`/`estse`/`serv` construye las tablas de relación y exporta archivos enriquecidos con hojas de relación, no relacionados, relacionados, maestra y resumen por empresa. | `api_{oocc,est_se,serv}_relacion_enriquecida.xlsx` |
 | `analisis_duplicados_desconexiones.py` | Detecta registros **desconectados**, **duplicados** y con **conexión nula** por tabla relacionada. | `analisis_desconectados.xlsx`, `analisis_duplicados.xlsx`, `analisis_conexion_nula.xlsx` |
 | `auditoria_lineas_metricas.py` | Construye el árbol Línea→Circuito→Tramo→Vano→Accesorio y aplica 10 reglas (contenedores vacíos, sufijos, herencia, accesorios, nodos, conectividad). | `auditoria_lineas_metricas.xlsx` |
-| `auditoria_contenedores_metricas.py` | Detecta contenedores vacíos (subestación/patio por FK; paño/casa/armario por nodo) y torres/marcolineas sin OOCC ni accesorios. | `auditoria_contenedores_metricas.xlsx` |
+| `auditoria_contenedores_metricas.py` | Detecta contenedores vacíos (subestación/patio por FK; paño/casa/armario por nodo compartido **o** por FK directa, p. ej. banco de baterías/generador hacia Casa SSGG) y torres/marcolineas sin OOCC ni accesorios. | `auditoria_contenedores_metricas.xlsx` |
 | `analisis_tension_patios.py` | Verifica la coherencia del nivel de tensión entre patio, barra y paño. | `analisis_tension_patios.xlsx` |
 | `revision_calidad_escriturageneral.py` | Dobles espacios, espacios extremos, `kV` mal escrito, minúsculas, guiones y separador ` - `. | `revision_calidad_escriturageneral.xlsx` |
 | `revision_herencia_nombre.py` | Verifica que los hijos contengan el nombre de la subestación raíz. | `revision_herencia_nombre.xlsx` |
 | `analisis_prefijo.py` | Verifica que el `name` comience con un prefijo válido definido en `utils/prefijos.json`. | `analisis_prefijo.xlsx` |
 | `revision_abreviatura_torre.py` | Verifica que la abreviatura de línea del nombre de la torre coincida con `utils/abreviatura_linea.json`. | `revision_abreviatura_torre.xlsx` |
 | `revision_abreviatura_vano.py` | Igual que torres, pero para los vanos. | `revision_abreviatura_vano.xlsx` |
+| `revision_documentos_datasheet.py` | Revisa los campos de documento obligatorios del `datasheet` de subestaciones y líneas (`DOCUMENTO_FALTANTE`, `DOCUMENTO_NO_EXISTE`, `DOCUMENTO_INCORRECTO`). | `revision_documentos_datasheet.xlsx` |
 | `proceso_excel.py` | Calcula `porcentaje error` en las hojas `analisis` y alimenta el avance diario (una columna por día). | `docs/avance/avance_error_diario.xlsx` |
 | `reporte_observaciones_empresa.py` | Unifica las observaciones de todos los reportes en un Excel por empresa (con la columna `decreto`). | `docs/ReporteExcelEmpresa/<ts>/<empresa>.xlsx` |
 | `sugerencias_cambios.py` | Sugerencias accionables: **simples** (corrección de nombre con columna `corregido`) y **complejas** (posible relacionamiento de OOCC/EstSE/Serv no relacionados). | `docs/SugerenciasCambios/<ts>/sugerenciascambios.xlsx` + uno por empresa |
-| `formato_informe.py` | Consolida las métricas por empresa y genera un informe Word y PDF estilizado (banner + KPI + dos secciones). | `docs/ArchivoReporteEmpresa/<ts>/{word,pdf}/` |
+| `formato_informe.py` | Consolida las métricas por empresa (instalaciones observadas) y genera un informe Word y PDF estilizado (banner + KPI + tres secciones). | `docs/ArchivoReporteEmpresa/<ts>/{word,pdf}/` |
+| `informe_global.py` | Informe Word/PDF consolidado de toda la BDATx y Excel resumen con una fila por empresa (mismas métricas, en columnas). | `docs/ArchivoReporteGlobal/<ts>/{word,pdf}/BDATx_global.{docx,pdf}` + `resumen_empresas.xlsx` |
 | `lineas_abreviadas.py` (`utils/scripts/`) | Genera `utils/abreviatura_linea.json` a partir de los nombres de las líneas de la BD. | `utils/abreviatura_linea.json` |
+| `md2word.py` (`utils/scripts/`) | Convierte un archivo `.md`/`.txt` a Word (`.docx`) y, con `--pdf`, a PDF. | `generados/<archivo>.docx` |
 
 ---
 
@@ -339,6 +392,7 @@ ReportesBDATx/
 - `docs/ReporteExcelEmpresa/<ts>_bd<AAAAMMDD>/` — observaciones consolidadas en Excel por empresa.
 - `docs/SugerenciasCambios/<ts>_bd<AAAAMMDD>/` — sugerencias de cambio (consolidado y por empresa).
 - `docs/ArchivoReporteEmpresa/<ts>_bd<AAAAMMDD>/` — informes Word y PDF por empresa.
+- `docs/ArchivoReporteGlobal/<ts>_bd<AAAAMMDD>/` — informe Word/PDF global y `resumen_empresas.xlsx` (una fila por empresa).
 
 Toda la carpeta `docs/` se crea automáticamente y está excluida del control de versiones.
 
@@ -386,9 +440,17 @@ Es normal durante la descarga de la base; no impide el proceso.
 
 ## Notas técnicas
 
-- `docs/`, `.env`, `__pycache__/` y `*.pyc` están excluidos del control de versiones (`.gitignore`).
+- `docs/`, `.env`, `generados/`, `__pycache__/` y `*.pyc` están excluidos del control de versiones (`.gitignore`).
 - Los análisis de calidad se calculan sobre registros con `status = 'EN_OPERACION'`.
 - El nombre de empresa se obtiene de `propietario_id` → `api_empresa.id` → `api_empresa.name`.
 - La fecha de la base BDATx se guarda en el `COMMENT ON DATABASE bdatx` (ej. `BDATx 2026-09-07 16:14:00`) y se expone con `config.fecha_bd()`; los reportes la agregan como sufijo `-bd<fecha>`.
 - La conversión de Word a PDF usa `win32com.client` y requiere Microsoft Word instalado.
 - El archivo `utils/abreviatura_linea.json` se regenera con `python utils/scripts/lineas_abreviadas.py`; si no existe, las revisiones de abreviatura de torre y vano se omiten con una advertencia.
+- `utils/esqueletos_instalaciones_json/` contiene los esqueletos por tipo de instalación; `revision_documentos_datasheet.py` toma de ahí los campos de documento obligatorios del `datasheet` de subestaciones y líneas.
+
+---
+
+## Repositorio y contacto
+
+- **Repositorio público**: <https://github.com/Coordinador-Depto-Activos-Infotecnica/reportes-calidad-bdatx>
+- **Consultas**: cualquier consulta o requerimiento debe dirigirse a **activostx@coordinador.cl**.
