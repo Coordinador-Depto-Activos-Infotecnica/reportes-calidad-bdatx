@@ -1,0 +1,24 @@
+{
+    "id": 0,
+    "ref_id": "string",
+    "name": "string",
+    "description": "string",
+    "status": "string",
+    "subestacion_id": "string",
+    "propietario_id": "string",
+    "decreto_id": "string",
+    "categoria_vu_id": "string",
+    "estructura_ssee": [],
+    "oocc": [],
+    "validacionbbdd": 0,
+    "validacionactivos": 0,
+    "datasheet": {
+        "tipoPatio": "string",
+        "nivelTension": "string",
+        "tipoTecnologia": "string",
+        "ESTADO_CERTIFICACION": {},
+        "fechaEntradaEnOperacion": "string",
+        "antecedentesComplementarios": 0,
+        "planosDetallesMontajeParaAlumbradoCanalizacionesYSistemasPuestaTierra": 0
+    }
+}

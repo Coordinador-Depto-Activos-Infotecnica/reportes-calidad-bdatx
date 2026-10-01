@@ -11,6 +11,7 @@ Salida: docs/ReporteExcelEmpresa/<aaaammdd_hhmmss>/<empresa>.xlsx
 import os
 import sys
 import re
+import hashlib
 import warnings
 from datetime import datetime
 
@@ -46,7 +47,8 @@ TIPO_INSTALACION_A_TABLA = {
     "accesorios-vanos": "api_accesoriovano",
 }
 
-# Catálogo canónico de reglas: dos grupos con subcategorías.
+# Catálogo canónico de reglas: refleja exactamente la estructura de
+# criterios-revision/criterio_revision_validacion.md (tres grupos con subcategorías).
 CATALOGO = [
     {"grupo": "General", "subcategoria": "Duplicidad por nombre",
      "codigos": ["NOMBRE_DUPLICADO"]},
@@ -70,54 +72,19 @@ CATALOGO = [
                  "KV_MAL_ESCRITO"]},
     {"grupo": "General", "subcategoria": "Conectividad de circuitos",
      "codigos": ["CIRCUITO_TRAMOS_DESCONECTADOS"]},
+    {"grupo": "Anexos", "subcategoria": "Documentos del datasheet",
+     "codigos": ["DOCUMENTO_FALTANTE", "DOCUMENTO_NO_EXISTE", "DOCUMENTO_INCORRECTO"]},
     {"grupo": "Específica", "subcategoria": "Completitud específica por instalación",
      "codigos": ["VANO_SIN_ACCESORIOS", "TORRE_SIN_OOCC", "MARCO_SIN_OOCC",
                  "TORRE_SIN_ACCESORIOS", "MARCO_SIN_ACCESORIOS", "VANO_MULTIPLES_ACCESORIOS"]},
     {"grupo": "Específica", "subcategoria": "Nodos específicos",
-     "codigos": ["VANO_SIN_NODO1", "VANO_SIN_NODO2", "TRAMO_NODOS_IGUALES",
-                 "TRAMO_NOMBRE_NODOS_NO_COINCIDEN"]},
+     "codigos": ["VANO_SIN_NODO1", "VANO_SIN_NODO2", "TRAMO_NODOS_IGUALES"]},
     {"grupo": "Específica", "subcategoria": "Coherencia de tensión en patios",
      "codigos": ["PATIO_TENSION_NO_IDENTIFICADA", "BARRA_TENSION_NO_COINCIDE",
                  "PANO_TENSION_NO_COINCIDE"]},
     {"grupo": "Específica", "subcategoria": "Abreviatura de línea de vanos",
      "codigos": ["ABREVIATURA_LINEA_VANO"]},
 ]
-
-CODIGO_A_SEVERIDAD = {
-    "NOMBRE_DUPLICADO": "ERROR",
-    "CONTENEDOR_VACIO": "ERROR",
-    "REGISTRO_DESCONECTADO": "ERROR",
-    "CONEXION_NULA": "ERROR",
-    "SIN_RELACION": "ERROR",
-    "RELACION_DESCONECTADA": "ERROR",
-    "PREFIJO_NOMBRE": "ADVERTENCIA",
-    "ABREVIATURA_LINEA_TORRE": "ERROR",
-    "ABREVIATURA_LINEA_VANO": "ERROR",
-    "HERENCIA_LINEA": "ERROR",
-    "HERENCIA_SUBESTACION": "ERROR",
-    "SUFIJO_NOMBRE": "ERROR",
-    "NOMBRE_MINUSCULAS": "ADVERTENCIA",
-    "NOMBRE_DOBLE_ESPACIO": "ERROR",
-    "NOMBRE_ESPACIOS_EXTREMOS": "ERROR",
-    "NOMBRE_GUION_CON_ESPACIOS": "ERROR",
-    "NOMBRE_GUION_LARGO": "ERROR",
-    "NOMBRE_SIN_SEPARADOR": "ERROR",
-    "KV_MAL_ESCRITO": "ERROR",
-    "CIRCUITO_TRAMOS_DESCONECTADOS": "ERROR",
-    "VANO_SIN_ACCESORIOS": "ERROR",
-    "TORRE_SIN_OOCC": "ERROR",
-    "MARCO_SIN_OOCC": "ERROR",
-    "TORRE_SIN_ACCESORIOS": "ERROR",
-    "MARCO_SIN_ACCESORIOS": "ERROR",
-    "VANO_MULTIPLES_ACCESORIOS": "ERROR",
-    "VANO_SIN_NODO1": "ERROR",
-    "VANO_SIN_NODO2": "ERROR",
-    "TRAMO_NODOS_IGUALES": "ERROR",
-    "TRAMO_NOMBRE_NODOS_NO_COINCIDEN": "ADVERTENCIA",
-    "PATIO_TENSION_NO_IDENTIFICADA": "ADVERTENCIA",
-    "BARRA_TENSION_NO_COINCIDE": "ERROR",
-    "PANO_TENSION_NO_COINCIDE": "ERROR",
-}
 
 # Agrupación de la Revisión Específica por instalación (Patio/Vano/Torre/Marcolinea/Tramo).
 # Cada instalación lista sus reglas como (código, etiqueta legible).
@@ -158,7 +125,6 @@ ESPECIFICAS_POR_INSTALACION = [
         "instalacion": "Tramo",
         "reglas": [
             ("TRAMO_NODOS_IGUALES", "Nodos iguales"),
-            ("TRAMO_NOMBRE_NODOS_NO_COINCIDEN", "Nombres de nodos no coinciden"),
         ],
     },
 ]
@@ -497,13 +463,50 @@ def leer_tension_patios():
     })
 
 
+def leer_documentos_datasheet():
+    ruta = os.path.join(REPORTE_DIR, "revision_documentos_datasheet.xlsx")
+    if not os.path.exists(ruta):
+        return pd.DataFrame(columns=COLUMNAS)
+    df = pd.read_excel(
+        ruta, sheet_name="Detalle",
+        usecols=["tabla", "codigo", "id", "nombre", "propietario", "detalle"],
+    )
+    return _frame({
+        "tipo_instalacion": df["tabla"].map(clean),
+        "id": df["id"].map(clean),
+        "nombre": df["nombre"].map(clean),
+        "propietario_name": df["propietario"].map(clean),
+        "observacion": df["codigo"].map(clean),
+        "detalle": df["detalle"].map(clean),
+        "fuente": "revision_documentos_datasheet.xlsx",
+    })
+
+
 def _normalizar_id(v):
-    s = clean(v)
+    s = clean(v).strip()
     if s == "":
         return ""
     if re.fullmatch(r"-?\d+\.0+", s):
         s = s.split(".")[0]
     return s
+
+
+normalizar_id = _normalizar_id
+
+
+def hash_error(tipo, id_activo, observacion):
+    cadena = f"{clean(tipo).strip()}|{_normalizar_id(id_activo)}|{clean(observacion).strip()}"
+    return hashlib.sha256(cadena.encode("utf-8")).hexdigest()
+
+
+def cargar_hashes_justificados():
+    conn = psycopg2.connect(**config.DB_ERRORES_CONN)
+    try:
+        cur = conn.cursor()
+        cur.execute("SELECT error_hash FROM auditoria_errores WHERE justificado")
+        return {r[0] for r in cur.fetchall()}
+    finally:
+        conn.close()
 
 
 def _cargar_decreto_map(conn):
@@ -575,7 +578,23 @@ def agregar_decreto(df):
     return df
 
 
-def consolidar_observaciones():
+def _filtrar_justificados(df):
+    if df.empty:
+        return df
+    justificados = cargar_hashes_justificados()
+    if not justificados:
+        return df
+    hashes = pd.Series(
+        [
+            hash_error(t, i, o)
+            for t, i, o in zip(df["tipo_instalacion"], df["id"], df["observacion"])
+        ],
+        index=df.index,
+    )
+    return df[~hashes.isin(justificados)]
+
+
+def consolidar_observaciones(excluir_justificados=True):
     cargadores = [
         ("analisis_desconectados", leer_analisis("analisis_desconectados.xlsx", "REGISTRO_DESCONECTADO", "Registro desconectado (relacionamiento fuera de operación)")),
         ("analisis_duplicados", leer_analisis("analisis_duplicados.xlsx", "NOMBRE_DUPLICADO", "Nombre duplicado dentro de la tabla")),
@@ -588,6 +607,7 @@ def consolidar_observaciones():
         ("prefijo", leer_prefijo()),
         ("abreviatura_torre", leer_abreviatura_torre()),
         ("abreviatura_vano", leer_abreviatura_vano()),
+        ("documentos_datasheet", leer_documentos_datasheet()),
         ("tension_patios", leer_tension_patios()),
     ]
 
@@ -608,6 +628,8 @@ def consolidar_observaciones():
         lambda t: TIPO_INSTALACION_A_TABLA.get(t, t)
     )
     df["propietario_name"] = df["propietario_name"].replace("", "Sin empresa")
+    if excluir_justificados:
+        df = _filtrar_justificados(df)
     return df[COLUMNAS]
 
 

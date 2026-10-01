@@ -1,0 +1,37 @@
+{
+    "id": 0,
+    "ref_id": "string",
+    "name": "string",
+    "description": "string",
+    "status": "string",
+    "nodo_estructura_id": "string",
+    "propietario_id": "string",
+    "decreto_id": "string",
+    "categoria_vu_id": "string",
+    "validacionbbdd": 0,
+    "validacionactivos": 0,
+    "datasheet": {
+        "accesorio1": {
+            "unidad": "string",
+            "cantidad": 0,
+            "descripcion": "string"
+        },
+        "accesorio2": {
+            "unidad": "string",
+            "cantidad": 0,
+            "descripcion": "string"
+        },
+        "accesorio3": {
+            "unidad": "string",
+            "cantidad": 0,
+            "descripcion": "string"
+        },
+        "cajaEmpalmeOpgw": false,
+        "platinaPuestaTierra": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "ESTADO_CERTIFICACION": {},
+        "cantidadPlacasNumeracion": 0
+    }
+}

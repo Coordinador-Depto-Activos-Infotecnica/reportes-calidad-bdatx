@@ -1,0 +1,27 @@
+{
+    "id": 0,
+    "ref_id": "string",
+    "name": "string",
+    "description": "string",
+    "status": "string",
+    "vano_id": "string",
+    "propietario_id": "string",
+    "decreto_id": "string",
+    "categoria_vu_id": "string",
+    "validacionbbdd": 0,
+    "validacionactivos": 0,
+    "datasheet": {
+        "cantidadBalizas": 0,
+        "tipoAmortiguador": "string",
+        "tipoEspaciadores": "string",
+        "cantidadManguitos": 0,
+        "numeroSensoresDlr": 0,
+        "ESTADO_CERTIFICACION": {},
+        "cantidadEspaciadores": 0,
+        "cantidadAmortiguadores": 0,
+        "fechaPuestaEnOperacion": "string",
+        "cantidadSeparadoresFase": 0,
+        "cantidadDesviadoresVuelo": 0,
+        "cantidadSenalizacionAves": 0
+    }
+}

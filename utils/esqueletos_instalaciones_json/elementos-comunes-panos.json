@@ -1,0 +1,51 @@
+{
+    "id": 0,
+    "inf_id": 0,
+    "ref_id": "string",
+    "name": "string",
+    "description": "string",
+    "status": "string",
+    "pano_id": "string",
+    "propietario_id": "string",
+    "decreto_id": "string",
+    "categoria_vu_id": "string",
+    "oocc": [],
+    "validacionbbdd": 0,
+    "validacionactivos": 0,
+    "datasheet": {
+        "cantidad": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "cercoPerimetral": {
+            "tipo": "string",
+            "altura": {
+                "unidad": "string",
+                "magnitud": 0
+            },
+            "longitud": {
+                "unidad": "string",
+                "magnitud": 0
+            }
+        },
+        "tipoElementoPano": "string",
+        "caminosInteriores": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "conjuntoLuminaria": {
+            "cantidad": 0,
+            "potenciaPorLuminaria": {
+                "unidad": "string",
+                "magnitud": 0
+            }
+        },
+        "ESTADO_CERTIFICACION": {},
+        "cantidadSistemasAlarma": 0,
+        "fechaEntradaEnOperacion": "string",
+        "mallaPuestaPuestaTierra": {
+            "unidad": "string",
+            "magnitud": 0
+        }
+    }
+}

@@ -1,0 +1,51 @@
+{
+    "id": 0,
+    "ref_id": "string",
+    "name": "string",
+    "description": "string",
+    "status": "string",
+    "tramo_id": "string",
+    "subestacion_id": "string",
+    "propietario_id": "string",
+    "nodo1_id": "string",
+    "nodo2_id": "string",
+    "decreto_id": "string",
+    "categoria_vu_id": "string",
+    "estructura_ssee": [],
+    "oocc": [],
+    "validacionbbdd": 0,
+    "validacionactivos": 0,
+    "datasheet": {
+        "altoTunel": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "anchoTunel": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "largoTunel": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "tipoConductor": "string",
+        "corrienteNominal": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "seccionConductor": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "longitudConductor": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "aislacionConductor": "string",
+        "sistemaIluminacion": false,
+        "sistemaVentilacion": false,
+        "ESTADO_CERTIFICACION": {},
+        "fechaEntradaEnOperacion": "string",
+        "numeroConductoresPorFase": 0
+    }
+}

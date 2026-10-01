@@ -1,0 +1,41 @@
+{
+    "id": 0,
+    "inf_id": 0,
+    "ref_id": "string",
+    "name": "string",
+    "description": "string",
+    "status": "string",
+    "nodo_id": "string",
+    "propietario_id": "string",
+    "decreto_id": "string",
+    "categoria_vu_id": "string",
+    "estructura_ssee": [],
+    "oocc": [],
+    "validacionbbdd": 0,
+    "validacionactivos": 0,
+    "datasheet": {
+        "cantidad": 0,
+        "tipoFase": 0,
+        "datosPlaca": 0,
+        "fabricante": "string",
+        "numeroSerie": "string",
+        "tipoReactor": "string",
+        "anoFabricacion": 0,
+        "tensionNominal": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "potenciaReactiva": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "reactanciaNeutro": 0,
+        "ESTADO_CERTIFICACION": {},
+        "fechaEntradaEnOperacion": "string",
+        "tipoSistemaRefrigeracion": "string",
+        "clasereactoresdebarraslineas": {
+            "idClaseSql": 0,
+            "descripcionClaseSql": "string"
+        }
+    }
+}

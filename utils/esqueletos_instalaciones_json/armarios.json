@@ -1,0 +1,37 @@
+{
+    "id": 0,
+    "ref_id": "string",
+    "name": "string",
+    "description": "string",
+    "status": "string",
+    "propietario_id": "string",
+    "nodo_id": "string",
+    "decreto_id": "string",
+    "categoria_vu_id": "string",
+    "estructura_ssee": [],
+    "oocc": [],
+    "validacionbbdd": 0,
+    "validacionactivos": 0,
+    "datasheet": {
+        "dimensiones": {
+            "alto": {
+                "unidad": "string",
+                "magnitud": 0
+            },
+            "ancho": {
+                "unidad": "string",
+                "magnitud": 0
+            },
+            "profundidad": {
+                "unidad": "string",
+                "magnitud": 0
+            }
+        },
+        "nombreArmario": "string",
+        "ESTADO_CERTIFICACION": {},
+        "fechaEntradaEnOperacion": "string",
+        "informacionComplementaria": 0,
+        "numeroIdentificadorEnPlano": "string",
+        "planosDetallesMontajeParaAlumbradoCanalizacionesYSistemasPuestaTierra": 0
+    }
+}

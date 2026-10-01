@@ -1,0 +1,17 @@
+{
+    "id": "string",
+    "inf_id": 0,
+    "ref_id": "string",
+    "name": "string",
+    "description": "string",
+    "status": "string",
+    "grupo_id": "string",
+    "giro_id": "string",
+    "rut": "string",
+    "address": "string",
+    "phone": "string",
+    "email": "string",
+    "registered_name": "string",
+    "general_manager": "string",
+    "datasheet": {}
+}

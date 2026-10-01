@@ -81,13 +81,6 @@ def extraer_abreviatura(nombre):
 
 
 def cargar_abreviaturas():
-    if not os.path.exists(ABREV_JSON_PATH):
-        print(
-            f"[WARN] No existe {ABREV_JSON_PATH}. Se omite la revisión de "
-            "abreviatura de línea (genere el archivo con "
-            "utils/scripts/lineas_abreviadas.py)."
-        )
-        return {}
     with open(ABREV_JSON_PATH, encoding="utf-8") as f:
         registros = json.load(f)
     mapa = {}

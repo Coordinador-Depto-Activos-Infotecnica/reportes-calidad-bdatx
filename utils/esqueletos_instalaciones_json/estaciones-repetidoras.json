@@ -1,0 +1,64 @@
+{
+    "id": 0,
+    "ref_id": "string",
+    "name": "string",
+    "description": "string",
+    "status": "string",
+    "tramo_id": "string",
+    "propietario_id": "string",
+    "decreto_id": "string",
+    "categoria_vu_id": "string",
+    "servidumbre": [],
+    "validacionbbdd": 0,
+    "validacionactivos": 0,
+    "datasheet": {
+        "numeroAntenas": 0,
+        "coordenadasUtm": {
+            "datum": "string",
+            "zonaOHuso": "string",
+            "coordenadaEste": 0,
+            "coordenadaNorte": 0,
+            "altitudGeografica": 0
+        },
+        "numeroArmarios": 0,
+        "cercoPerimetral": {
+            "tipo": "string",
+            "altura": {
+                "unidad": "string",
+                "magnitud": 0
+            },
+            "longitud": {
+                "unidad": "string",
+                "magnitud": 0
+            }
+        },
+        "planoFundaciones": 0,
+        "conjuntoLuminaria": {
+            "cantidad": 0,
+            "potenciaPorLuminaria": {
+                "unidad": "string",
+                "magnitud": 0
+            }
+        },
+        "mallaPuestaTierra": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "serviciosAuxiliares": false,
+        "ESTADO_CERTIFICACION": {},
+        "fechaEntradaEnOperacion": "string",
+        "casetaTelecomunicaciones": false,
+        "idTorreTelecomunicaciones": 0,
+        "informacionComplementaria": 0,
+        "planoMallaTierraSubterranea": 0,
+        "planoTorreTelecomunicaciones": 0,
+        "planoDisposicionEquiposEnPlanta": 0,
+        "idObraCivilTorreTelecomunicaciones": 0,
+        "idObraCivilCasetaTelecomunicaciones": 0,
+        "planoDisposicionEquiposEnElevacionOCorte": 0,
+        "permisosServicioLimitadoTelecomunicaciones": 0,
+        "planoDisposicionAntenasEnTorreTelecomunicaciones": 0,
+        "planoDisposicionEquiposEnCasetaTelecomunicaciones": 0,
+        "planosDetallesMontajeParaAlumbradoCanalizacionesYSistemasPuestaTierra": 0
+    }
+}

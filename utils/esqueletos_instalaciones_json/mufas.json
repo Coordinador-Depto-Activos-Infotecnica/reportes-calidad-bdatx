@@ -1,0 +1,27 @@
+{
+    "id": 0,
+    "ref_id": "string",
+    "name": "string",
+    "description": "string",
+    "status": "string",
+    "nodo_id": "string",
+    "propietario_id": "string",
+    "decreto_id": "string",
+    "categoria_vu_id": "string",
+    "oocc": [],
+    "validacionbbdd": 0,
+    "validacionactivos": 0,
+    "datasheet": {
+        "tipoMufa": "string",
+        "nivelTension": "string",
+        "seccionCable": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "tipoMufasSql": "string",
+        "cantidadPorFase": 0,
+        "materialAislador": "string",
+        "ESTADO_CERTIFICACION": {},
+        "fechaEntradaEnOperacion": "string"
+    }
+}

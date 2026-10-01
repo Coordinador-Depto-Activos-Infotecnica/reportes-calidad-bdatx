@@ -1,0 +1,51 @@
+{
+    "id": 0,
+    "inf_id": 0,
+    "ref_id": "string",
+    "name": "string",
+    "description": "string",
+    "status": "string",
+    "nodo_id": "string",
+    "propietario_id": "string",
+    "decreto_id": "string",
+    "categoria_vu_id": "string",
+    "estructura_ssee": [],
+    "oocc": [],
+    "validacionbbdd": 0,
+    "validacionactivos": 0,
+    "datasheet": {
+        "marca": "string",
+        "modelo": "string",
+        "cantidad": 0,
+        "capacidad": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "datosPlaca": 0,
+        "numeroSerie": "string",
+        "tipoAislante": "string",
+        "clasePrecison": "string",
+        "anoFabricacion": 0,
+        "tensionNominal": "string",
+        "tipoTecnologia": "string",
+        "tipoTransformador": "string",
+        "numeroNucleosMedida": 0,
+        "ESTADO_CERTIFICACION": {},
+        "relacionTransformacion": 0,
+        "fechaEntradaEnOperacion": "string",
+        "numeroNucleosProteccion": 0,
+        "tensionNucleoProteccion": "string",
+        "potenciaCadaNucleoMedida": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "potenciaNucleoProteccion": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "clasetransformadorpotencial": {
+            "idClaseSql": 0,
+            "descripcionClaseSql": "string"
+        }
+    }
+}

@@ -1,0 +1,78 @@
+{
+    "id": 0,
+    "ref_id": "string",
+    "name": "string",
+    "description": "string",
+    "status": "string",
+    "propietario_id": "string",
+    "linea_id": "string",
+    "comuna_id": "string",
+    "decreto_id": "string",
+    "categoria_vu_id": "string",
+    "oocc": [],
+    "validacionbbdd": 0,
+    "validacionactivos": 0,
+    "datasheet": {
+        "estructura": {
+            "modelo": "string",
+            "funcion": "string",
+            "tipoEstructura": "string"
+        },
+        "pesoPernos": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "tipoAcceso": {
+            "tipoAcceso": "string",
+            "anchoAccesoEstructura": {
+                "unidad": "string",
+                "magnitud": 0
+            },
+            "largoAccesoEstructura": {
+                "unidad": "string",
+                "magnitud": 0
+            },
+            "superficieAccesoEstructura": {
+                "unidad": "string",
+                "magnitud": 0
+            }
+        },
+        "posteMadera": {
+            "diametro": 0,
+            "longitud": 0,
+            "numeroPostes": 0
+        },
+        "posteHomigon": {
+            "peso": 0,
+            "longitud": 0,
+            "numeroPostes": 0
+        },
+        "rolTerrenoSql": "string",
+        "coordenadasUtm": {
+            "datum": "string",
+            "zonaOHuso": "string",
+            "coordenadaEste": 0,
+            "coordenadaNorte": 0,
+            "altitudGeografica": 0
+        },
+        "numeroPlacaSql": "string",
+        "tipoEstructuraSql": "string",
+        "estructuraMetalica": {
+            "peso": 0,
+            "tipo": "string",
+            "longitud": 0,
+            "material": "string"
+        },
+        "tipoPosteMaderaSql": "string",
+        "capacidadRupturaSql": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "clasePosteMaderaSql": 0,
+        "ESTADO_CERTIFICACION": {},
+        "tipoAmbienteEstructura": "string",
+        "tipoEstructuraMetalica": "string",
+        "fechaEntradaEnOperacion": "string",
+        "informacionComplementaria": 0
+    }
+}

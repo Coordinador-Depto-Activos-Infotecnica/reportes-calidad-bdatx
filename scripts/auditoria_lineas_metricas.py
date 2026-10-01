@@ -100,16 +100,15 @@ class AuditoriaLineas:
 
     def _audit_rule_catalog(self):
         return [
-            {"codigo": "CONTENEDOR_VACIO", "severidad": "ERROR", "aplica_a": "Subestación/Patio/Paño/SSGG/Armario/Línea/Circuito/Tramo", "descripcion": "Contenedor sin ninguna instalación aguas abajo.", "criterio": "El contenedor principal debe poseer al menos una instalación en el nivel siguiente."},
-            {"codigo": "SUFIJO_NOMBRE", "severidad": "ERROR", "aplica_a": "Circuito/Tramo", "descripcion": "Inconsistencia en los sufijos Cn (C1/C2) del nombre.", "criterio": "El sufijo Cn del Tramo debe coincidir con el del Circuito padre, y no puede existir C2 o superior sin C1."},
-            {"codigo": "HERENCIA_LINEA", "severidad": "ERROR", "aplica_a": "Circuito", "descripcion": "El nombre del Circuito no hereda el nombre de la Línea padre.", "criterio": "El Nombre de Circuito debe contener el nombre de la Línea (sin los prefijos LT/CTO)."},
-            {"codigo": "VANO_SIN_ACCESORIOS", "severidad": "ERROR", "aplica_a": "Vano", "descripcion": "Vano sin registro de Accesorios Vanos.", "criterio": "La guía indica que cada vano cuenta con un registro de accesorios vanos."},
-            {"codigo": "VANO_SIN_NODO1", "severidad": "ERROR", "aplica_a": "Vano", "descripcion": "Vano sin Nodo 1 detectable.", "criterio": "Nodo 1 es obligatorio para el Vano."},
-            {"codigo": "VANO_SIN_NODO2", "severidad": "ERROR", "aplica_a": "Vano", "descripcion": "Vano sin Nodo 2 detectable.", "criterio": "Nodo 2 es obligatorio para el Vano."},
-            {"codigo": "TRAMO_NODOS_IGUALES", "severidad": "ERROR", "aplica_a": "Tramo", "descripcion": "Nodo 1 y Nodo 2 son el mismo registro.", "criterio": "Los extremos del Tramo deben ser distintos."},
-            {"codigo": "TRAMO_NOMBRE_NODOS_NO_COINCIDEN", "severidad": "ADVERTENCIA", "aplica_a": "Tramo", "descripcion": "Los nombres de los nodos no se reflejan completamente en la nomenclatura del Tramo.", "criterio": "Revisión de coherencia de extremos."},
-            {"codigo": "CIRCUITO_TRAMOS_DESCONECTADOS", "severidad": "ERROR", "aplica_a": "Circuito", "descripcion": "Los Tramos forman más de un componente desconectado.", "criterio": "Los segmentos de un Circuito deben formar una secuencia continua."},
-            {"codigo": "VANO_MULTIPLES_ACCESORIOS", "severidad": "ERROR", "aplica_a": "Vano", "descripcion": "Más de un registro Accesorios Vanos para un mismo Vano.", "criterio": "La guía indica un único registro de accesorios por cada vano."},
+            {"codigo": "CONTENEDOR_VACIO", "aplica_a": "Subestación/Patio/Paño/SSGG/Armario/Línea/Circuito/Tramo", "descripcion": "Contenedor sin ninguna instalación aguas abajo.", "criterio": "El contenedor principal debe poseer al menos una instalación en el nivel siguiente."},
+            {"codigo": "SUFIJO_NOMBRE", "aplica_a": "Circuito/Tramo", "descripcion": "Inconsistencia en los sufijos Cn (C1/C2) del nombre.", "criterio": "El sufijo Cn del Tramo debe coincidir con el del Circuito padre, y no puede existir C2 o superior sin C1."},
+            {"codigo": "HERENCIA_LINEA", "aplica_a": "Circuito", "descripcion": "El nombre del Circuito no hereda el nombre de la Línea padre.", "criterio": "El Nombre de Circuito debe contener el nombre de la Línea (sin los prefijos LT/CTO)."},
+            {"codigo": "VANO_SIN_ACCESORIOS", "aplica_a": "Vano", "descripcion": "Vano sin registro de Accesorios Vanos.", "criterio": "La guía indica que cada vano cuenta con un registro de accesorios vanos."},
+            {"codigo": "VANO_SIN_NODO1", "aplica_a": "Vano", "descripcion": "Vano sin Nodo 1 detectable.", "criterio": "Nodo 1 es obligatorio para el Vano."},
+            {"codigo": "VANO_SIN_NODO2", "aplica_a": "Vano", "descripcion": "Vano sin Nodo 2 detectable.", "criterio": "Nodo 2 es obligatorio para el Vano."},
+            {"codigo": "TRAMO_NODOS_IGUALES", "aplica_a": "Tramo", "descripcion": "Nodo 1 y Nodo 2 son el mismo registro.", "criterio": "Los extremos del Tramo deben ser distintos."},
+            {"codigo": "CIRCUITO_TRAMOS_DESCONECTADOS", "aplica_a": "Circuito", "descripcion": "Los Tramos forman más de un componente desconectado.", "criterio": "Los segmentos de un Circuito deben formar una secuencia continua."},
+            {"codigo": "VANO_MULTIPLES_ACCESORIOS", "aplica_a": "Vano", "descripcion": "Más de un registro Accesorios Vanos para un mismo Vano.", "criterio": "La guía indica un único registro de accesorios por cada vano."},
         ]
 
     # ----------------------------------------------------------------
@@ -128,9 +127,8 @@ class AuditoriaLineas:
         for r in records:
             children[r["parent_iid"]].append(r)
 
-        def add(severity, code, record, message, rule):
+        def add(code, record, message, rule):
             findings.append({
-                "severidad": severity,
                 "codigo": code,
                 "nivel": record.get("nivel", ""),
                 "tipo": record.get("tipo", ""),
@@ -149,14 +147,14 @@ class AuditoriaLineas:
             if r["tipo"].strip().lower() == TIPO_LINEA:
                 circuit_children = [c for c in children.get(r["iid"], []) if c["tipo"].strip().lower() == TIPO_CIRCUITO]
                 if self.loaded_depth >= 1 and not circuit_children:
-                    add("ERROR", "CONTENEDOR_VACIO", r, "Línea sin ningún Circuito relacionado; falta el nivel siguiente.", "El contenedor principal Línea debe poseer al menos un Circuito.")
+                    add("CONTENEDOR_VACIO", r, "Línea sin ningún Circuito relacionado; falta el nivel siguiente.", "El contenedor principal Línea debe poseer al menos un Circuito.")
 
         # Circuito sin tramos
         for r in records:
             if r["tipo"].strip().lower() == TIPO_CIRCUITO:
                 tramo_children = [c for c in children.get(r["iid"], []) if c["tipo"].strip().lower() == TIPO_TRAMO]
                 if self.loaded_depth >= 2 and not tramo_children:
-                    add("ERROR", "CONTENEDOR_VACIO", r, "Circuito sin ningún tramo relacionado.", "La guía indica que todos los circuitos poseen al menos un tramo.")
+                    add("CONTENEDOR_VACIO", r, "Circuito sin ningún tramo relacionado.", "La guía indica que todos los circuitos poseen al menos un tramo.")
 
         # C2 o superior sin C1
         for line in records:
@@ -171,7 +169,7 @@ class AuditoriaLineas:
             if nums and any(n >= 2 for n, _ in nums) and not any(n == 1 for n, _ in nums):
                 for n, c in nums:
                     if n >= 2:
-                        add("ERROR", "SUFIJO_NOMBRE", c, "Se detectó Circuito 2 o superior sin Circuito 1 bajo la misma línea.", "La guía prohíbe C2 o superior si no existe C1.")
+                        add("SUFIJO_NOMBRE", c, "Se detectó Circuito 2 o superior sin Circuito 1 bajo la misma línea.", "La guía prohíbe C2 o superior si no existe C1.")
 
         # Coherencia de nomenclatura Circuito -> Tramo
         def final_circuit_designator(name):
@@ -200,7 +198,7 @@ class AuditoriaLineas:
             parent_circuit = circuit_designator(parent["nombre"])
             tramo_circuit = final_circuit_designator(r["nombre"])
             if parent_circuit and tramo_circuit and parent_circuit != tramo_circuit:
-                add("ERROR", "SUFIJO_NOMBRE", r,
+                add("SUFIJO_NOMBRE", r,
                     f'Error de relacionamiento por nomenclatura: el Circuito padre "{parent["nombre"]}" es {parent_circuit}, pero el Tramo "{r["nombre"]}" termina en {tramo_circuit}.',
                     "La designación C1/C2 del Tramo debe coincidir con la designación C1/C2 del Circuito padre.")
 
@@ -209,7 +207,7 @@ class AuditoriaLineas:
             if r["tipo"].strip().lower() == TIPO_TRAMO:
                 next_children = children.get(r["iid"], [])
                 if self.loaded_depth >= 3 and not next_children:
-                    add("ERROR", "CONTENEDOR_VACIO", r, "Tramo sin instalaciones relacionadas en el nivel siguiente; falta Vano para tramo aéreo o Túnel para tramo subterráneo.", "El contenedor Tramo debe continuar con la instalación correspondiente al tipo de tramo.")
+                    add("CONTENEDOR_VACIO", r, "Tramo sin instalaciones relacionadas en el nivel siguiente; falta Vano para tramo aéreo o Túnel para tramo subterráneo.", "El contenedor Tramo debe continuar con la instalación correspondiente al tipo de tramo.")
 
         # Accesorios por vano
         accessory_types = {"accesorios-vanos", "accesorios_vanos", "accesoriosvanos"}
@@ -218,9 +216,9 @@ class AuditoriaLineas:
                 continue
             acc = [c for c in children.get(r["iid"], []) if c["tipo"].strip().lower() in accessory_types]
             if self.loaded_depth >= 4 and len(acc) == 0:
-                add("ERROR", "VANO_SIN_ACCESORIOS", r, "Vano sin registro de Accesorios Vanos; falta la instalación del nivel siguiente.", "La guía indica que cada vano cuenta con un registro de accesorios vanos.")
+                add("VANO_SIN_ACCESORIOS", r, "Vano sin registro de Accesorios Vanos; falta la instalación del nivel siguiente.", "La guía indica que cada vano cuenta con un registro de accesorios vanos.")
             elif len(acc) > 1:
-                add("ERROR", "VANO_MULTIPLES_ACCESORIOS", r, f"Se detectaron {len(acc)} registros de Accesorios Vanos.", "La guía indica un único registro de accesorios por cada vano.")
+                add("VANO_MULTIPLES_ACCESORIOS", r, f"Se detectaron {len(acc)} registros de Accesorios Vanos.", "La guía indica un único registro de accesorios por cada vano.")
 
         # Herencia del nombre de la Línea en el Circuito (sin prefijos LT/CTO)
         def _sin_prefijo(name, prefijo):
@@ -238,7 +236,7 @@ class AuditoriaLineas:
             linea_core = _sin_prefijo(parent["nombre"], "LT ")
             circuito_core = _sin_prefijo(r["nombre"], "CTO ")
             if linea_core and linea_core not in circuito_core:
-                add("ERROR", "HERENCIA_LINEA", r,
+                add("HERENCIA_LINEA", r,
                     f'El nombre del Circuito "{r["nombre"]}" no hereda el nombre de la Línea padre "{parent["nombre"]}".',
                     "El nombre del Circuito debe contener el nombre de la Línea (sin los prefijos LT/CTO).")
 
@@ -256,9 +254,8 @@ class AuditoriaLineas:
         for r in records:
             children[r.get("parent_iid", "")].append(r)
 
-        def add(severity, code_value, record, message, rule):
+        def add(code_value, record, message, rule):
             findings.append({
-                "severidad": severity,
                 "codigo": code_value,
                 "nivel": record.get("nivel", ""),
                 "tipo": record.get("tipo", ""),
@@ -289,7 +286,7 @@ class AuditoriaLineas:
                 for error_code, candidates, label in required.get(tipo, []):
                     value = self._field_value(detail, candidates)
                     if value is None or value == "" or value == [] or value == {}:
-                        add("ERROR", error_code, r, f'No se detectó el campo obligatorio "{label}" en el detalle del registro.', f"Validación de campo obligatorio para {tipo}.")
+                        add(error_code, r, f'No se detectó el campo obligatorio "{label}" en el detalle del registro.', f"Validación de campo obligatorio para {tipo}.")
 
         # Nodos y continuidad de tramos
         if self.audit_nodes:
@@ -307,14 +304,7 @@ class AuditoriaLineas:
                 node_info[r["iid"]] = (n1, n2)
 
                 if n1 and n2 and n1 == n2:
-                    add("ERROR", "TRAMO_NODOS_IGUALES", r, f"El Tramo posee el mismo Nodo 1 y Nodo 2 ({n1}).", "Los extremos de un Tramo deben representar dos puntos distintos.")
-
-                n1_name = self._value_name(n1_value)
-                n2_name = self._value_name(n2_value)
-                tramo_name = self._normalize_name(r["nombre"])
-                node_names = [self._normalize_name(x) for x in (n1_name, n2_name) if x]
-                if len(node_names) == 2 and not all(name in tramo_name for name in node_names):
-                    add("ADVERTENCIA", "TRAMO_NOMBRE_NODOS_NO_COINCIDEN", r, "Los nombres recuperados de Nodo 1/Nodo 2 no se identifican completamente en el nombre del Tramo.", "Revisar coherencia entre los extremos del Tramo y su nomenclatura.")
+                    add("TRAMO_NODOS_IGUALES", r, f"El Tramo posee el mismo Nodo 1 y Nodo 2 ({n1}).", "Los extremos de un Tramo deben representar dos puntos distintos.")
 
             # Conectividad por circuito
             for circuit in records:
@@ -344,16 +334,14 @@ class AuditoriaLineas:
                                 unvisited.remove(neighbor)
                                 stack.append(neighbor)
                 if components > 1:
-                    add("ERROR", "CIRCUITO_TRAMOS_DESCONECTADOS", circuit, f"Los Tramos con información de nodos forman {components} grupos desconectados.", "Los segmentos de un Circuito deben formar una secuencia física continua.")
+                    add("CIRCUITO_TRAMOS_DESCONECTADOS", circuit, f"Los Tramos con información de nodos forman {components} grupos desconectados.", "Los segmentos de un Circuito deben formar una secuencia física continua.")
 
         return findings
 
     def run(self):
         findings = self.audit_records()
         findings = self._append_deep_audit_findings(findings, self.records)
-        severity_order = {"ERROR": 0, "ADVERTENCIA": 1, "INFO": 2}
         findings.sort(key=lambda x: (
-            severity_order.get(x["severidad"], 9),
             x["nivel"] if isinstance(x["nivel"], int) else 99,
             x["tipo"],
             x["id"],
@@ -593,7 +581,7 @@ def construir_registros(data):
 # EXPORTACIÓN
 # ============================================================
 
-COLUMNAS_HALLAZGO = ["severidad", "codigo", "nivel", "tipo", "id", "nombre", "propietario_id", "propietario", "padre", "mensaje", "regla"]
+COLUMNAS_HALLAZGO = ["codigo", "nivel", "tipo", "id", "nombre", "propietario_id", "propietario", "padre", "mensaje", "regla"]
 
 
 def exportar(findings, records, catalog):
@@ -602,69 +590,50 @@ def exportar(findings, records, catalog):
     df_findings = pd.DataFrame(findings, columns=COLUMNAS_HALLAZGO)
 
     total_registros = len(records)
-    errores = int((df_findings["severidad"] == "ERROR").sum()) if not df_findings.empty else 0
-    advertencias = int((df_findings["severidad"] != "ERROR").sum()) if not df_findings.empty else 0
 
     # Resumen
     resumen = pd.DataFrame([
         {"Indicador": "Registros auditados", "Valor": total_registros},
-        {"Indicador": "Errores", "Valor": errores},
-        {"Indicador": "Advertencias", "Valor": advertencias},
         {"Indicador": "Total hallazgos", "Valor": len(findings)},
     ])
 
     # Por regla (incluye reglas con 0)
-    counters = {}
+    counters = defaultdict(int)
     for f in findings:
-        key = (f["codigo"], f["severidad"])
-        counters[key] = counters.get(key, 0) + 1
+        counters[f["codigo"]] += 1
 
     por_regla = []
     for rule in catalog:
         por_regla.append({
             "codigo": rule["codigo"],
-            "severidad": rule["severidad"],
             "aplica_a": rule["aplica_a"],
-            "cantidad": counters.get((rule["codigo"], rule["severidad"]), 0),
+            "cantidad": counters.get(rule["codigo"], 0),
             "descripcion": rule["descripcion"],
         })
     df_regla = pd.DataFrame(por_regla)
 
     # Por propietario
-    prop_stats = defaultdict(lambda: {"errores": 0, "advertencias": 0, "total": 0})
+    prop_stats = defaultdict(int)
     for f in findings:
-        key = (f["propietario_id"], f["propietario"])
-        if f["severidad"] == "ERROR":
-            prop_stats[key]["errores"] += 1
-        else:
-            prop_stats[key]["advertencias"] += 1
-        prop_stats[key]["total"] += 1
+        prop_stats[(f["propietario_id"], f["propietario"])] += 1
     por_propietario = []
-    for (pid, pname), s in sorted(prop_stats.items(), key=lambda kv: -kv[1]["total"]):
+    for (pid, pname), n in sorted(prop_stats.items(), key=lambda kv: -kv[1]):
         por_propietario.append({
             "propietario_id": pid,
             "propietario": pname,
-            "errores": s["errores"],
-            "advertencias": s["advertencias"],
-            "total_hallazgos": s["total"],
+            "total_hallazgos": n,
         })
     df_propietario = pd.DataFrame(por_propietario)
 
     # Por tipo
-    tipo_stats = defaultdict(lambda: {"errores": 0, "advertencias": 0, "total": 0})
+    tipo_stats = defaultdict(int)
     for f in findings:
-        if f["severidad"] == "ERROR":
-            tipo_stats[f["tipo"]]["errores"] += 1
-        else:
-            tipo_stats[f["tipo"]]["advertencias"] += 1
-        tipo_stats[f["tipo"]]["total"] += 1
+        tipo_stats[f["tipo"]] += 1
     por_tipo = []
-    for tipo, s in sorted(tipo_stats.items(), key=lambda kv: -kv[1]["total"]):
+    for tipo, n in sorted(tipo_stats.items(), key=lambda kv: -kv[1]):
         por_tipo.append({
             "tipo": tipo,
-            "errores": s["errores"],
-            "advertencias": s["advertencias"],
-            "total_hallazgos": s["total"],
+            "total_hallazgos": n,
         })
     df_tipo = pd.DataFrame(por_tipo)
 
@@ -693,7 +662,7 @@ def exportar(findings, records, catalog):
                 writer.writerow([f[c] for c in COLUMNAS_HALLAZGO])
 
     print(f"Registros auditados: {total_registros}")
-    print(f"Hallazgos: {len(findings)} (errores={errores}, advertencias={advertencias})")
+    print(f"Hallazgos: {len(findings)}")
     print(f"Excel reporte: {xlsx_reporte}")
     print(f"CSV reporte:   {csv_reporte}")
 

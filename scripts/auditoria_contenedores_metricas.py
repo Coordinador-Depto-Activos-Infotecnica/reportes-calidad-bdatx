@@ -7,9 +7,12 @@ BD PostgreSQL local.
 Detecta contenedores "vacíos" (sin ningún hijo EN_OPERACION):
 
 - Subestación y Patio  -> por FK directa (subestacion_id / patio_subestacion_id).
-- Paño, Casa SSGG y Armario -> por nodo compartido: el contenedor tiene un
-  nodo_id, y sus hijos (celda, interruptor, etc.) comparten ese mismo nodo_id.
-  Se busca en todas las tablas que poseen nodo_id, excluyendo la propia tabla.
+- Paño, Casa SSGG y Armario -> por nodo compartido (el contenedor tiene un
+  nodo_id y sus hijos comparten ese mismo nodo_id, buscando en todas las tablas
+  que poseen nodo_id) o por FK directa: algunos hijos cuelgan del contenedor
+  con una columna propia (p. ej. api_bancobaterias y api_generadorenergia usan
+  casa_servicios_generales_id; api_equipooplat usa armario_id). Esas relaciones
+  se derivan de utils/relacionamiento_columnas_instalaciones.json.
 - Torre y Marcolinea -> sin OOCC (vía api_torre_oocc / api_marcolinea_oocc) y
   sin accesorios estructurales (vía api_accesorioestructuralineaaerea usando
   nodo_estructura_id.id / nodo_estructura_id.instalacion).
@@ -24,6 +27,7 @@ Salidas:
 import os
 import sys
 import csv
+import json
 import warnings
 from datetime import datetime
 from collections import defaultdict
@@ -158,6 +162,37 @@ def detectar_vacios_fk(conn, empresa_map):
     return vacios, totales
 
 
+def _hijos_fk_contenedores(contenedores):
+    """Hijos por FK directa de cada contenedor por nodo.
+
+    Se derivan de utils/relacionamiento_columnas_instalaciones.json: para cada
+    tabla de 'tablas_analizar' se revisan sus columnas conexionN y se resuelve
+    (con 'diccionario_tabla_relacion') a qué tabla relacionada apuntan. Devuelve
+    {contenedor: [(tabla_hijo, columna_fk), ...]}.
+    """
+    ruta = os.path.join(BASE_DIR, "utils", "relacionamiento_columnas_instalaciones.json")
+    if not os.path.exists(ruta):
+        return {}
+    with open(ruta, encoding="utf-8") as f:
+        data = json.load(f)
+
+    mapa_rel = {
+        e.get("conexion"): e.get("tabla_relacion")
+        for e in data.get("diccionario_tabla_relacion", [])
+    }
+    conjunto = set(contenedores)
+    hijos = defaultdict(list)
+    for tabla in data.get("tablas_analizar", []):
+        tabla_hijo = tabla.get("tablas_postgres")
+        for clave, valor in tabla.items():
+            if not clave.startswith("conexion") or not valor:
+                continue
+            contenedor = mapa_rel.get(valor)
+            if contenedor in conjunto and tabla_hijo != contenedor:
+                hijos[contenedor].append((tabla_hijo, valor))
+    return dict(hijos)
+
+
 def detectar_vacios_nodo(conn, empresa_map):
     sharing = defaultdict(set)
     for t in TABLAS_NODO:
@@ -168,6 +203,21 @@ def detectar_vacios_nodo(conn, empresa_map):
         )
         for nid in df["nodo_id"].tolist():
             sharing[nid].add(t)
+
+    # Hijos por FK directa de cada contenedor por nodo (p. ej. Casa SSGG ->
+    # api_bancobaterias, api_generadorenergia, api_sistemarespaldoenergia).
+    refs_fk = defaultdict(set)
+    for contenedor, hijos in _hijos_fk_contenedores([t for t, _ in CONTENEDORES_NODO]).items():
+        for tabla_hijo, fk in hijos:
+            try:
+                ch = pd.read_sql(
+                    f'SELECT DISTINCT "{fk}" AS fk FROM "{tabla_hijo}" '
+                    f"WHERE status='EN_OPERACION' AND \"{fk}\" IS NOT NULL",
+                    conn,
+                )
+            except Exception:
+                continue
+            refs_fk[contenedor].update(ch["fk"].tolist())
 
     vacios = []
     totales = {}
@@ -182,19 +232,21 @@ def detectar_vacios_nodo(conn, empresa_map):
             nid = row["nodo_id"]
             pid = row["propietario_id"]
             others = (sharing.get(nid, set()) - {tabla}) if not pd.isna(nid) else set()
-            if not others:
-                vacios.append({
-                    "contenedor": tabla,
-                    "label": label,
-                    "observacion": "Contenedor vacío",
-                    "codigo": "CONTENEDOR_VACIO",
-                    "mecanismo": "Nodo compartido",
-                    "id": row["id"],
-                    "nombre": row["name"] or "",
-                    "propietario_id": "" if pid is None else str(pid),
-                    "propietario": "" if pid is None else str(empresa_map.get(pid, "")),
-                    "nodo_id": "" if pd.isna(nid) else str(int(nid)),
-                })
+            tiene_hijo_fk = row["id"] in refs_fk.get(tabla, set())
+            if others or tiene_hijo_fk:
+                continue
+            vacios.append({
+                "contenedor": tabla,
+                "label": label,
+                "observacion": "Contenedor vacío",
+                "codigo": "CONTENEDOR_VACIO",
+                "mecanismo": "Nodo compartido / FK directa",
+                "id": row["id"],
+                "nombre": row["name"] or "",
+                "propietario_id": "" if pid is None else str(pid),
+                "propietario": "" if pid is None else str(empresa_map.get(pid, "")),
+                "nodo_id": "" if pd.isna(nid) else str(int(nid)),
+            })
     return vacios, totales
 
 

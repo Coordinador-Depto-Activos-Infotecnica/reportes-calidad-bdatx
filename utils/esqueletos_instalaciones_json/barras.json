@@ -1,0 +1,43 @@
+{
+    "id": 0,
+    "inf_id": 0,
+    "ref_id": "string",
+    "name": "string",
+    "description": "string",
+    "status": "string",
+    "patio_subestacion_id": "string",
+    "propietario_id": "string",
+    "decreto_id": "string",
+    "categoria_vu_id": "string",
+    "estructura_ssee": [],
+    "oocc": [],
+    "validacionbbdd": 0,
+    "validacionactivos": 0,
+    "datasheet": {
+        "tipoBarra": "string",
+        "nivelTension": "string",
+        "tipoTecnologia": "string",
+        "capacidadTermica": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "corrienteNominal": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "seccionConductor": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "materialConductor": "string",
+        "numeroSeparadores": 0,
+        "ESTADO_CERTIFICACION": {},
+        "fechaEntradaEnOperacion": "string",
+        "numeroConductoresPorFase": 0,
+        "numeroBarraEnLaConfiguracion": 0,
+        "longitudTotalNumeroConductores": {
+            "unidad": "string",
+            "magnitud": 0
+        }
+    }
+}

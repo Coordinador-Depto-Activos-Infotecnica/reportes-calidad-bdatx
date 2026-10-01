@@ -1,0 +1,81 @@
+{
+    "id": 0,
+    "inf_id": 0,
+    "ref_id": "string",
+    "name": "string",
+    "description": "string",
+    "status": "string",
+    "nodo_id": "string",
+    "propietario_id": "string",
+    "decreto_id": "string",
+    "categoria_vu_id": "string",
+    "estructura_ssee": [],
+    "oocc": [],
+    "validacionbbdd": 0,
+    "validacionactivos": 0,
+    "datasheet": {
+        "clasecelda": {
+            "idClaseSql": 0,
+            "descripcionClaseSql": "string"
+        },
+        "datosPlaca": 0,
+        "datosGenerales": {
+            "marca": "string",
+            "modelo": "string",
+            "funcion": "string",
+            "numeroSerie": "string",
+            "anoFabricacion": 0,
+            "tipoTecnologia": "string",
+            "fechaEntradaEnOperacion": "string"
+        },
+        "datosInterruptor": {
+            "tensionNominal": {
+                "unidad": "string",
+                "magnitud": 0
+            },
+            "corrienteNominal": {
+                "unidad": "string",
+                "magnitud": 0
+            },
+            "capacidadCierreEnCortocircuito": {
+                "unidad": "string",
+                "magnitud": 0
+            }
+        },
+        "poseeOtrosEquipos": {
+            "medidores": false,
+            "pararrayos": false,
+            "sistemaProteccion": false
+        },
+        "datosDesconectador": {
+            "corrienteNominal": {
+                "unidad": "string",
+                "magnitud": 0
+            },
+            "desconectadorTipoFusible": false,
+            "poseeDesconectadoresTierra": false
+        },
+        "ESTADO_CERTIFICACION": {},
+        "datosTransformadorCorriente": {
+            "numeroNucleosMedida": 0,
+            "numeroNucleosProteccion": 0,
+            "corrienteNominalPrimaria": {
+                "unidad": "string",
+                "magnitud": 0
+            },
+            "corrienteNominalSecundaria": {
+                "unidad": "string",
+                "magnitud": 0
+            },
+            "clasePrecisionNucleosMedida": "string",
+            "clasePrecisionNucleosProteccion": "string"
+        },
+        "datosTransformadorPotencial": {
+            "numeroNucleosMedida": 0,
+            "numeroNucleosProteccion": 0,
+            "tensionNominalSecundario": "string",
+            "clasePrecisionNucleosMedida": "string",
+            "clasePrecisionNucleosProteccion": "string"
+        }
+    }
+}

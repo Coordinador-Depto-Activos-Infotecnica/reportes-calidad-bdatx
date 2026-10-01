@@ -2,20 +2,20 @@
   {
     "linea_id": 17,
     "nombre_linea": "LT TAP OFF EL AGUILA - LLUTA 13.8kV",
-    "se1_nombre_bd": null,
+    "se1_nombre_bd": "S/E TAP OFF EL AGUILA",
     "se2_nombre_bd": "S/E LLUTA",
-    "se1_abreviatura": null,
+    "se1_abreviatura": "TOLLA",
     "se2_abreviatura": "LLUT",
-    "nombre_abreviado": null
+    "nombre_abreviado": "TOLLA-LLUT"
   },
   {
     "linea_id": 18,
     "nombre_linea": "LT TAP OFF VITOR N°2 MOVIL - CHACA 23kV",
-    "se1_nombre_bd": null,
+    "se1_nombre_bd": "S/E TAP OFF VITOR N°2 MOVIL",
     "se2_nombre_bd": "S/E CHACA",
-    "se1_abreviatura": null,
+    "se1_abreviatura": "TOVI2",
     "se2_abreviatura": "CHAC",
-    "nombre_abreviado": null
+    "nombre_abreviado": "TOVI2-CHAC"
   },
   {
     "linea_id": 19,
@@ -146,11 +146,11 @@
   {
     "linea_id": 34,
     "nombre_linea": "LT TAP OFF TAMARUGAL - LA HUAYCA II 66kV",
-    "se1_nombre_bd": "S/E TAMARUGAL",
+    "se1_nombre_bd": "S/E TAP OFF TAMARUGAL",
     "se2_nombre_bd": "S/E LA HUAYCA II",
-    "se1_abreviatura": "TAMA",
+    "se1_abreviatura": "TOTAM",
     "se2_abreviatura": "LHU",
-    "nombre_abreviado": "TAMA-LHU"
+    "nombre_abreviado": "TOTAM-LHU"
   },
   {
     "linea_id": 35,
@@ -254,20 +254,20 @@
   {
     "linea_id": 50,
     "nombre_linea": "LT TAP OFF NUEVA VICTORIA - LLAMARA 66kV",
-    "se1_nombre_bd": null,
+    "se1_nombre_bd": "S/E TAP OFF NUEVA VICTORIA",
     "se2_nombre_bd": "S/E LLAMARA",
-    "se1_abreviatura": null,
+    "se1_abreviatura": "TONVI",
     "se2_abreviatura": "LLAM",
-    "nombre_abreviado": null
+    "nombre_abreviado": "TONVI-LLAM"
   },
   {
     "linea_id": 51,
     "nombre_linea": "LT TAP OFF NUEVA VICTORIA - SUR VIEJO 66kV",
-    "se1_nombre_bd": null,
+    "se1_nombre_bd": "S/E TAP OFF NUEVA VICTORIA",
     "se2_nombre_bd": "S/E SUR VIEJO",
-    "se1_abreviatura": null,
+    "se1_abreviatura": "TONVI",
     "se2_abreviatura": "SVIE",
-    "nombre_abreviado": null
+    "nombre_abreviado": "TONVI-SVIE"
   },
   {
     "linea_id": 52,
@@ -425,9 +425,9 @@
   {
     "linea_id": 71,
     "nombre_linea": "LT TAP OFF QUIANI - EST. N°6 66kV",
-    "se1_nombre_bd": "S/E QUIANI",
+    "se1_nombre_bd": "S/E TAP OFF QUIANI",
     "se2_nombre_bd": null,
-    "se1_abreviatura": "QUIA",
+    "se1_abreviatura": "TOQUI",
     "se2_abreviatura": null,
     "nombre_abreviado": null
   },
@@ -542,11 +542,11 @@
   {
     "linea_id": 85,
     "nombre_linea": "LT TAP OFF QUILLAGUA - PEQ 220kV",
-    "se1_nombre_bd": null,
+    "se1_nombre_bd": "S/E TAP OFF QUILLAGUA",
     "se2_nombre_bd": "S/E PEQ",
-    "se1_abreviatura": null,
+    "se1_abreviatura": "TOGUA",
     "se2_abreviatura": "PEQ",
-    "nombre_abreviado": null
+    "nombre_abreviado": "TOGUA-PEQ"
   },
   {
     "linea_id": 86,
@@ -722,11 +722,11 @@
   {
     "linea_id": 109,
     "nombre_linea": "LT TAP OFF ENLACE - ANTUCOYA 220kV",
-    "se1_nombre_bd": "S/E ENLACE",
+    "se1_nombre_bd": "S/E TAP OFF ENLACE",
     "se2_nombre_bd": "S/E ANTUCOYA",
-    "se1_abreviatura": "ENL",
+    "se1_abreviatura": "TOENL",
     "se2_abreviatura": "ANYA",
-    "nombre_abreviado": "ENL-ANYA"
+    "nombre_abreviado": "TOENL-ANYA"
   },
   {
     "linea_id": 110,
@@ -974,11 +974,11 @@
   {
     "linea_id": 140,
     "nombre_linea": "LT TAP OFF BARRILES - MANTOS DE LA LUNA 110kV",
-    "se1_nombre_bd": null,
+    "se1_nombre_bd": "S/E TAP OFF BARRILES",
     "se2_nombre_bd": "S/E MANTOS DE LA LUNA",
-    "se1_abreviatura": null,
+    "se1_abreviatura": "TOBLG",
     "se2_abreviatura": "MLUN",
-    "nombre_abreviado": null
+    "nombre_abreviado": "TOBLG-MLUN"
   },
   {
     "linea_id": 141,
@@ -1091,11 +1091,11 @@
   {
     "linea_id": 157,
     "nombre_linea": "LT TAP OFF ENLACE ANTUCOYA - ANTUCOYA 110kV",
-    "se1_nombre_bd": null,
+    "se1_nombre_bd": "S/E TAP OFF ENLACE ANTUCOYA",
     "se2_nombre_bd": "S/E ANTUCOYA",
-    "se1_abreviatura": null,
+    "se1_abreviatura": "TOANT",
     "se2_abreviatura": "ANYA",
-    "nombre_abreviado": null
+    "nombre_abreviado": "TOANT-ANYA"
   },
   {
     "linea_id": 158,
@@ -1532,11 +1532,11 @@
   {
     "linea_id": 219,
     "nombre_linea": "LT TAP OFF DESALANT - DESALANT 110kV",
-    "se1_nombre_bd": "S/E DESALANT",
+    "se1_nombre_bd": "S/E TAP OFF DESALANT",
     "se2_nombre_bd": "S/E DESALANT",
-    "se1_abreviatura": "DES",
+    "se1_abreviatura": "TODES",
     "se2_abreviatura": "DES",
-    "nombre_abreviado": "DES-DES"
+    "nombre_abreviado": "TODES-DES"
   },
   {
     "linea_id": 220,
@@ -1550,20 +1550,20 @@
   {
     "linea_id": 221,
     "nombre_linea": "LT TAP OFF LLANOS - AGUAS BLANCAS 66kV",
-    "se1_nombre_bd": null,
+    "se1_nombre_bd": "S/E TAP OFF LLANOS",
     "se2_nombre_bd": "S/E AGUAS BLANCAS",
-    "se1_abreviatura": null,
+    "se1_abreviatura": "TONOS",
     "se2_abreviatura": "ABLA",
-    "nombre_abreviado": null
+    "nombre_abreviado": "TONOS-ABLA"
   },
   {
     "linea_id": 222,
     "nombre_linea": "LT TAP OFF PALESTINA - EL PEÑON 66kV",
-    "se1_nombre_bd": null,
+    "se1_nombre_bd": "S/E TAP OFF PALESTINA",
     "se2_nombre_bd": "S/E EL PEÑON",
-    "se1_abreviatura": null,
+    "se1_abreviatura": "TOINA",
     "se2_abreviatura": "PEÑO",
-    "nombre_abreviado": null
+    "nombre_abreviado": "TOINA-PEÑO"
   },
   {
     "linea_id": 223,
@@ -1658,11 +1658,11 @@
   {
     "linea_id": 233,
     "nombre_linea": "LT TAP OFF LA NEGRA - INACESA 23kV",
-    "se1_nombre_bd": null,
+    "se1_nombre_bd": "S/E TAP OFF LA NEGRA",
     "se2_nombre_bd": "S/E INACESA",
-    "se1_abreviatura": null,
+    "se1_abreviatura": "TOLAN",
     "se2_abreviatura": "INA",
-    "nombre_abreviado": null
+    "nombre_abreviado": "TOLAN-INA"
   },
   {
     "linea_id": 234,
@@ -1991,11 +1991,11 @@
   {
     "linea_id": 272,
     "nombre_linea": "LT TAP OFF PUNTA TORO - LOS COLORADOS 110kV",
-    "se1_nombre_bd": null,
+    "se1_nombre_bd": "S/E TAP OFF PUNTA TORO",
     "se2_nombre_bd": "S/E LOS COLORADOS",
-    "se1_abreviatura": null,
+    "se1_abreviatura": "TOTOR",
     "se2_abreviatura": "LCOL",
-    "nombre_abreviado": null
+    "nombre_abreviado": "TOTOR-LCOL"
   },
   {
     "linea_id": 273,
@@ -2108,9 +2108,9 @@
   {
     "linea_id": 286,
     "nombre_linea": "LT TAP OFF TALINAY - TALINAY 220kV",
-    "se1_nombre_bd": null,
+    "se1_nombre_bd": "S/E TAP OFF TALINAY",
     "se2_nombre_bd": null,
-    "se1_abreviatura": null,
+    "se1_abreviatura": "TONAY",
     "se2_abreviatura": null,
     "nombre_abreviado": null
   },
@@ -2396,11 +2396,11 @@
   {
     "linea_id": 320,
     "nombre_linea": "LT TAP OFF DOÑA CARMEN - DOÑA CARMEN 220kV",
-    "se1_nombre_bd": "S/E DOÑA CARMEN",
+    "se1_nombre_bd": "S/E TAP OFF DOÑA CARMEN",
     "se2_nombre_bd": "S/E DOÑA CARMEN",
-    "se1_abreviatura": "DCAR",
+    "se1_abreviatura": "TOCAR",
     "se2_abreviatura": "DCAR",
-    "nombre_abreviado": "DCAR-DCAR"
+    "nombre_abreviado": "TOCAR-DCAR"
   },
   {
     "linea_id": 321,
@@ -2639,11 +2639,11 @@
   {
     "linea_id": 350,
     "nombre_linea": "LT TAP OFF CODELCO VENTANAS - CODELCO VENTANAS 1 110kV",
-    "se1_nombre_bd": null,
+    "se1_nombre_bd": "S/E TAP OFF CODELCO VENTANAS",
     "se2_nombre_bd": "S/E CODELCO VENTANAS 1",
-    "se1_abreviatura": null,
+    "se1_abreviatura": "TOVEN",
     "se2_abreviatura": "COV1",
-    "nombre_abreviado": null
+    "nombre_abreviado": "TOVEN-COV1"
   },
   {
     "linea_id": 351,
@@ -2675,11 +2675,11 @@
   {
     "linea_id": 354,
     "nombre_linea": "LT TAP OFF ACHUPALLAS - CONCON 110kV",
-    "se1_nombre_bd": null,
+    "se1_nombre_bd": "S/E TAP OFF ACHUPALLAS",
     "se2_nombre_bd": "S/E CONCON",
-    "se1_abreviatura": null,
+    "se1_abreviatura": "TOACH",
     "se2_abreviatura": "CONC",
-    "nombre_abreviado": null
+    "nombre_abreviado": "TOACH-CONC"
   },
   {
     "linea_id": 355,
@@ -2828,11 +2828,11 @@
   {
     "linea_id": 372,
     "nombre_linea": "LT TAP OFF ALGARROBO - SAN JERONIMO 66KV",
-    "se1_nombre_bd": "S/E ALGARROBO",
+    "se1_nombre_bd": "S/E TAP OFF ALGARROBO",
     "se2_nombre_bd": "S/E SAN JERONIMO",
-    "se1_abreviatura": "ALG",
+    "se1_abreviatura": "TOALG",
     "se2_abreviatura": "SJER",
-    "nombre_abreviado": "ALG-SJER"
+    "nombre_abreviado": "TOALG-SJER"
   },
   {
     "linea_id": 374,
@@ -3279,10 +3279,10 @@
     "linea_id": 430,
     "nombre_linea": "LT CENTRAL LOMA LOS COLORADOS - TAP OFF PUNTA PEUCO 110kV",
     "se1_nombre_bd": "S/E CENTRAL LOMA LOS COLORADOS",
-    "se2_nombre_bd": null,
+    "se2_nombre_bd": "S/E TAP OFF PUNTA PEUCO",
     "se1_abreviatura": "CCO",
-    "se2_abreviatura": null,
-    "nombre_abreviado": null
+    "se2_abreviatura": "TOPEU",
+    "nombre_abreviado": "CCO-TOPEU"
   },
   {
     "linea_id": 431,
@@ -3298,9 +3298,9 @@
     "nombre_linea": "LT TAP BATUCO - BATUCO 110kV",
     "se1_nombre_bd": "S/E BATUCO",
     "se2_nombre_bd": "S/E BATUCO",
-    "se1_abreviatura": "TBAT",
-    "se2_abreviatura": "TBAT",
-    "nombre_abreviado": "TBAT-TBAT"
+    "se1_abreviatura": "BAT",
+    "se2_abreviatura": "BAT",
+    "nombre_abreviado": "BAT-BAT"
   },
   {
     "linea_id": 433,
@@ -3341,11 +3341,11 @@
   {
     "linea_id": 437,
     "nombre_linea": "LT TAP OFF LA LAJA-CENTRAL QUELTEHUES 110 kV",
-    "se1_nombre_bd": null,
+    "se1_nombre_bd": "S/E TAP OFF LA LAJA",
     "se2_nombre_bd": "S/E CENTRAL QUELTEHUES",
-    "se1_abreviatura": null,
+    "se1_abreviatura": "TOLAJ",
     "se2_abreviatura": "CQUE",
-    "nombre_abreviado": null
+    "nombre_abreviado": "TOLAJ-CQUE"
   },
   {
     "linea_id": 438,
@@ -3362,8 +3362,8 @@
     "se1_nombre_bd": "S/E CENTRAL CARENA",
     "se2_nombre_bd": "S/E LO PRADO",
     "se1_abreviatura": "CENA",
-    "se2_abreviatura": "TOLOPR",
-    "nombre_abreviado": "CENA-TOLOPR"
+    "se2_abreviatura": "LOPR",
+    "nombre_abreviado": "CENA-LOPR"
   },
   {
     "linea_id": 440,
@@ -3783,10 +3783,10 @@
     "linea_id": 489,
     "nombre_linea": "LT MINSAL - TAP OFF OESTE 110kV",
     "se1_nombre_bd": "S/E MINSAL",
-    "se2_nombre_bd": null,
+    "se2_nombre_bd": "S/E TAP OFF OESTE",
     "se1_abreviatura": "MINS",
-    "se2_abreviatura": null,
-    "nombre_abreviado": null
+    "se2_abreviatura": "TOOES",
+    "nombre_abreviado": "MINS-TOOES"
   },
   {
     "linea_id": 490,
@@ -3926,11 +3926,11 @@
   {
     "linea_id": 506,
     "nombre_linea": "LT TAP OFF NIHUE - LAS ARAÑAS 66kV",
-    "se1_nombre_bd": null,
+    "se1_nombre_bd": "S/E TAP OFF NIHUE",
     "se2_nombre_bd": "S/E LAS ARANAS",
-    "se1_abreviatura": null,
+    "se1_abreviatura": "TONIH",
     "se2_abreviatura": "LARA",
-    "nombre_abreviado": null
+    "nombre_abreviado": "TONIH-LARA"
   },
   {
     "linea_id": 507,
@@ -4007,11 +4007,11 @@
   {
     "linea_id": 518,
     "nombre_linea": "LT TAP OFF MINERA VALLE CENTRAL - MINERA VALLE CENTRAL 154kV",
-    "se1_nombre_bd": "S/E MINERA VALLE CENTRAL",
+    "se1_nombre_bd": "S/E TAP OFF MINERA VALLE CENTRAL",
     "se2_nombre_bd": "S/E MINERA VALLE CENTRAL",
-    "se1_abreviatura": "MCEN",
+    "se1_abreviatura": "TOVCE",
     "se2_abreviatura": "MCEN",
-    "nombre_abreviado": "MCEN-MCEN"
+    "nombre_abreviado": "TOVCE-MCEN"
   },
   {
     "linea_id": 519,
@@ -4457,7 +4457,7 @@
   {
     "linea_id": 581,
     "nombre_linea": "LT TAP OFF RIO TOLTEN - RIO TOLTEN 220kV",
-    "se1_nombre_bd": null,
+    "se1_nombre_bd": "S/E TAP OFF RIO TOLTEN",
     "se2_nombre_bd": null,
     "se1_abreviatura": "RTOL",
     "se2_abreviatura": "RTOL",
@@ -4466,11 +4466,11 @@
   {
     "linea_id": 582,
     "nombre_linea": "LT TAP OFF BUREO - PARQUE EOLICO RENAICO 220kV",
-    "se1_nombre_bd": null,
+    "se1_nombre_bd": "S/E TAP OFF BUREO",
     "se2_nombre_bd": "S/E PARQUE EOLICO RENAICO",
-    "se1_abreviatura": null,
+    "se1_abreviatura": "TOBUR",
     "se2_abreviatura": "EREN",
-    "nombre_abreviado": null
+    "nombre_abreviado": "TOBUR-EREN"
   },
   {
     "linea_id": 583,
@@ -4764,7 +4764,7 @@
     "linea_id": 622,
     "nombre_linea": "LT TAP OFF CHOCALAN - CHOCALAN 66kV",
     "se1_nombre_bd": "TAP CHOCALAN",
-    "se2_nombre_bd": "TAP CHOCALAN",
+    "se2_nombre_bd": "S/E CHOCALAN",
     "se1_abreviatura": "ALAN",
     "se2_abreviatura": "ALAN",
     "nombre_abreviado": "ALAN-ALAN"
@@ -4772,11 +4772,11 @@
   {
     "linea_id": 624,
     "nombre_linea": "LT TAP OFF HOSPITAL - HOSPITAL 66kV",
-    "se1_nombre_bd": "S/E HOSPITAL",
+    "se1_nombre_bd": "S/E TAP OFF HOSPITAL",
     "se2_nombre_bd": "S/E HOSPITAL",
-    "se1_abreviatura": "HOS",
+    "se1_abreviatura": "TOHOS",
     "se2_abreviatura": "HOS",
-    "nombre_abreviado": "HOS-HOS"
+    "nombre_abreviado": "TOHOS-HOS"
   },
   {
     "linea_id": 625,
@@ -4846,9 +4846,9 @@
     "nombre_linea": "LT LO PRADO - CURACAVI 44kV",
     "se1_nombre_bd": "S/E LO PRADO",
     "se2_nombre_bd": "S/E CURACAVI",
-    "se1_abreviatura": "TOLOPR",
+    "se1_abreviatura": "LOPR",
     "se2_abreviatura": "CAVI",
-    "nombre_abreviado": "TOLOPR-CAVI"
+    "nombre_abreviado": "LOPR-CAVI"
   },
   {
     "linea_id": 633,
@@ -4880,29 +4880,29 @@
   {
     "linea_id": 637,
     "nombre_linea": "LT TAP OFF GRANEROS - GRANEROS 66kV",
-    "se1_nombre_bd": "S/E GRANEROS",
+    "se1_nombre_bd": "S/E TAP OFF GRANEROS",
     "se2_nombre_bd": "S/E GRANEROS",
-    "se1_abreviatura": "GRA",
+    "se1_abreviatura": "TOGRA",
     "se2_abreviatura": "GRA",
-    "nombre_abreviado": "GRA-GRA"
+    "nombre_abreviado": "TOGRA-GRA"
   },
   {
     "linea_id": 638,
     "nombre_linea": "LT TAP OFF LA PALOMA - LA RONDA 66kV",
-    "se1_nombre_bd": null,
+    "se1_nombre_bd": "S/E TAP OFF LA PALOMA",
     "se2_nombre_bd": "S/E LA RONDA",
-    "se1_abreviatura": null,
+    "se1_abreviatura": "TOPAL",
     "se2_abreviatura": "LRO",
-    "nombre_abreviado": null
+    "nombre_abreviado": "TOPAL-LRO"
   },
   {
     "linea_id": 639,
     "nombre_linea": "LT TAP OFF RENGO - RENGO 66kV",
-    "se1_nombre_bd": "S/E RENGO",
+    "se1_nombre_bd": "S/E TAP OFF RENGO",
     "se2_nombre_bd": "S/E RENGO",
-    "se1_abreviatura": "REN",
+    "se1_abreviatura": "TOGO",
     "se2_abreviatura": "REN",
-    "nombre_abreviado": "REN-REN"
+    "nombre_abreviado": "TOGO-REN"
   },
   {
     "linea_id": 640,
@@ -4934,11 +4934,11 @@
   {
     "linea_id": 643,
     "nombre_linea": "LT TAP OFF MAESTRANZA - R2 66kV",
-    "se1_nombre_bd": null,
+    "se1_nombre_bd": "S/E TAP OFF MAESTRANZA",
     "se2_nombre_bd": "S/E R2",
-    "se1_abreviatura": null,
+    "se1_abreviatura": "TOMAE",
     "se2_abreviatura": "SER2",
-    "nombre_abreviado": null
+    "nombre_abreviado": "TOMAE-SER2"
   },
   {
     "linea_id": 644,
@@ -5024,9 +5024,9 @@
   {
     "linea_id": 655,
     "nombre_linea": "LT TAP OFF RIO COLORADO - RIO COLORADO 66kV",
-    "se1_nombre_bd": null,
+    "se1_nombre_bd": "S/E TAP OFF RIO COLORADO",
     "se2_nombre_bd": null,
-    "se1_abreviatura": null,
+    "se1_abreviatura": "TOADO",
     "se2_abreviatura": null,
     "nombre_abreviado": null
   },
@@ -5061,17 +5061,17 @@
     "linea_id": 660,
     "nombre_linea": "LT MONTERRICO - TAP OFF EL NEVADO 66kV",
     "se1_nombre_bd": "S/E MONTERRICO",
-    "se2_nombre_bd": null,
+    "se2_nombre_bd": "S/E TAP OFF EL NEVADO",
     "se1_abreviatura": "MONT",
-    "se2_abreviatura": null,
-    "nombre_abreviado": null
+    "se2_abreviatura": "TONEV",
+    "nombre_abreviado": "MONT-TONEV"
   },
   {
     "linea_id": 661,
     "nombre_linea": "LT TAP OFF SANTA CLARA - ITATA 66kV",
-    "se1_nombre_bd": "S/E SANTA CLARA",
+    "se1_nombre_bd": "S/E TAP OFF SANTA CLARA",
     "se2_nombre_bd": null,
-    "se1_abreviatura": "SCLA",
+    "se1_abreviatura": "TOCLA",
     "se2_abreviatura": null,
     "nombre_abreviado": null
   },
@@ -5123,11 +5123,11 @@
   {
     "linea_id": 667,
     "nombre_linea": "LT TAP OFF TRES ESQUINAS - TRES ESQUINAS 66kV",
-    "se1_nombre_bd": "S/E TRES ESQUINAS",
+    "se1_nombre_bd": "S/E TAP OFF TRES ESQUINAS",
     "se2_nombre_bd": "S/E TRES ESQUINAS",
-    "se1_abreviatura": "ESQI",
+    "se1_abreviatura": "TOESQ",
     "se2_abreviatura": "ESQI",
-    "nombre_abreviado": "ESQI-ESQI"
+    "nombre_abreviado": "TOESQ-ESQI"
   },
   {
     "linea_id": 668,
@@ -5159,11 +5159,11 @@
   {
     "linea_id": 671,
     "nombre_linea": "LT TAP OFF LOMA COLORADA - LOMA COLORADA 66kV",
-    "se1_nombre_bd": "S/E LOMA COLORADA",
+    "se1_nombre_bd": "S/E TAP OFF LOMA COLORADA",
     "se2_nombre_bd": "S/E LOMA COLORADA",
-    "se1_abreviatura": "LADA",
+    "se1_abreviatura": "TOCOL",
     "se2_abreviatura": "LADA",
-    "nombre_abreviado": "LADA-LADA"
+    "nombre_abreviado": "TOCOL-LADA"
   },
   {
     "linea_id": 672,
@@ -5250,7 +5250,7 @@
     "linea_id": 683,
     "nombre_linea": "LT COLO COLO - EJERCITO 66kV",
     "se1_nombre_bd": "S/E COLO COLO",
-    "se2_nombre_bd": "TAP EJERCITO",
+    "se2_nombre_bd": "S/E EJERCITO",
     "se1_abreviatura": "OLON",
     "se2_abreviatura": "EJE",
     "nombre_abreviado": "OLON-EJE"
@@ -5483,7 +5483,7 @@
   {
     "linea_id": 711,
     "nombre_linea": "LT TAP OFF RIO TOLTEN - CUNCO 110kV",
-    "se1_nombre_bd": null,
+    "se1_nombre_bd": "S/E TAP OFF RIO TOLTEN",
     "se2_nombre_bd": "S/E CUNCO",
     "se1_abreviatura": "RTOL",
     "se2_abreviatura": "CUN",
@@ -5503,9 +5503,9 @@
     "nombre_linea": "LT SANTA MARTA - PADRE HURTADO 110kV",
     "se1_nombre_bd": "S/E SANTA MARTA",
     "se2_nombre_bd": "S/E PADRE HURTADO",
-    "se1_abreviatura": "TOSMAR",
+    "se1_abreviatura": "SMAR",
     "se2_abreviatura": "PDHU",
-    "nombre_abreviado": "TOSMAR-PDHU"
+    "nombre_abreviado": "SMAR-PDHU"
   },
   {
     "linea_id": 714,
@@ -5592,10 +5592,10 @@
     "linea_id": 726,
     "nombre_linea": "LT MAYACA - TAP OFF MAYACA 110KV",
     "se1_nombre_bd": "S/E MAYACA",
-    "se2_nombre_bd": "S/E MAYACA",
+    "se2_nombre_bd": "S/E TAP OFF MAYACA",
     "se1_abreviatura": "MAY",
-    "se2_abreviatura": "MAY",
-    "nombre_abreviado": "MAY-MAY"
+    "se2_abreviatura": "TOMAY",
+    "nombre_abreviado": "MAY-TOMAY"
   },
   {
     "linea_id": 727,
@@ -5646,19 +5646,19 @@
     "linea_id": 733,
     "nombre_linea": "LT EST. 47 - TAP OFF CARAMPANGUE 66kV",
     "se1_nombre_bd": null,
-    "se2_nombre_bd": "S/E CARAMPANGUE",
+    "se2_nombre_bd": "S/E TAP OFF CARAMPANGUE",
     "se1_abreviatura": null,
-    "se2_abreviatura": "CARA",
+    "se2_abreviatura": "TOCMPG",
     "nombre_abreviado": null
   },
   {
     "linea_id": 735,
     "nombre_linea": "LT TAP OFF MAYACA - TAP OFF LA PALMA 110KV",
-    "se1_nombre_bd": "S/E MAYACA",
+    "se1_nombre_bd": "S/E TAP OFF MAYACA",
     "se2_nombre_bd": "S/E LA PALMA",
-    "se1_abreviatura": "MAY",
+    "se1_abreviatura": "TOMAY",
     "se2_abreviatura": "LPAL",
-    "nombre_abreviado": "MAY-LPAL"
+    "nombre_abreviado": "TOMAY-LPAL"
   },
   {
     "linea_id": 736,
@@ -6016,9 +6016,9 @@
     "nombre_linea": "LT TAP LO PRADO - LO PRADO 110kV",
     "se1_nombre_bd": "S/E LO PRADO",
     "se2_nombre_bd": "S/E LO PRADO",
-    "se1_abreviatura": "TOLOPR",
-    "se2_abreviatura": "TOLOPR",
-    "nombre_abreviado": "TOLOPR-TOLOPR"
+    "se1_abreviatura": "LOPR",
+    "se2_abreviatura": "LOPR",
+    "nombre_abreviado": "LOPR-LOPR"
   },
   {
     "linea_id": 791,
@@ -6095,11 +6095,11 @@
   {
     "linea_id": 802,
     "nombre_linea": "LT TAP OFF EL LOA - EL LOA 220kV",
-    "se1_nombre_bd": "S/E EL LOA",
+    "se1_nombre_bd": "S/E TAP OFF EL LOA",
     "se2_nombre_bd": "S/E EL LOA",
-    "se1_abreviatura": "ELOA",
+    "se1_abreviatura": "TOLOA",
     "se2_abreviatura": "ELOA",
-    "nombre_abreviado": "ELOA-ELOA"
+    "nombre_abreviado": "TOLOA-ELOA"
   },
   {
     "linea_id": 803,
@@ -6447,7 +6447,7 @@
     "linea_id": 853,
     "nombre_linea": "LT CONCEPCION - EJERCITO 66kV",
     "se1_nombre_bd": "S/E CONCEPCION",
-    "se2_nombre_bd": "TAP EJERCITO",
+    "se2_nombre_bd": "S/E EJERCITO",
     "se1_abreviatura": "CON",
     "se2_abreviatura": "EJE",
     "nombre_abreviado": "CON-EJE"
@@ -6455,7 +6455,7 @@
   {
     "linea_id": 854,
     "nombre_linea": "LT EJERCITO - CORONEL 66kV",
-    "se1_nombre_bd": "TAP EJERCITO",
+    "se1_nombre_bd": "S/E EJERCITO",
     "se2_nombre_bd": "S/E CORONEL",
     "se1_abreviatura": "EJE",
     "se2_abreviatura": "ONEL",
@@ -6807,7 +6807,7 @@
     "linea_id": 900,
     "nombre_linea": "LT ALONSO DE RIBERA - EJERCITO 66kV L2",
     "se1_nombre_bd": "S/E ALONSO DE RIBERA",
-    "se2_nombre_bd": "TAP EJERCITO",
+    "se2_nombre_bd": "S/E EJERCITO",
     "se1_abreviatura": "ARIB",
     "se2_abreviatura": "EJE",
     "nombre_abreviado": "ARIB-EJE"
@@ -6869,20 +6869,20 @@
   {
     "linea_id": 961,
     "nombre_linea": "LT TAP OFF ALGARROBO - CASABLANCA 66KV",
-    "se1_nombre_bd": "S/E ALGARROBO",
+    "se1_nombre_bd": "S/E TAP OFF ALGARROBO",
     "se2_nombre_bd": "S/E CASABLANCA",
-    "se1_abreviatura": "ALG",
+    "se1_abreviatura": "TOALG",
     "se2_abreviatura": "CASA",
-    "nombre_abreviado": "ALG-CASA"
+    "nombre_abreviado": "TOALG-CASA"
   },
   {
     "linea_id": 962,
     "nombre_linea": "LT TAP ALONSO DE CORDOVA - ALONSO DE CORDOVA 110kV",
     "se1_nombre_bd": "S/E ALONSO DE CORDOVA",
     "se2_nombre_bd": "S/E ALONSO DE CORDOVA",
-    "se1_abreviatura": "TOACOR",
-    "se2_abreviatura": "TOACOR",
-    "nombre_abreviado": "TOACOR-TOACOR"
+    "se1_abreviatura": "ACOR",
+    "se2_abreviatura": "ACOR",
+    "nombre_abreviado": "ACOR-ACOR"
   },
   {
     "linea_id": 963,
@@ -6952,9 +6952,9 @@
     "nombre_linea": "LT TAP CHACABUCO - CHACABUCO 110kV",
     "se1_nombre_bd": "S/E CHACABUCO",
     "se2_nombre_bd": "S/E CHACABUCO",
-    "se1_abreviatura": "TOBUCO",
-    "se2_abreviatura": "TOBUCO",
-    "nombre_abreviado": "TOBUCO-TOBUCO"
+    "se1_abreviatura": "BUCO",
+    "se2_abreviatura": "BUCO",
+    "nombre_abreviado": "BUCO-BUCO"
   },
   {
     "linea_id": 972,
@@ -7040,11 +7040,11 @@
   {
     "linea_id": 982,
     "nombre_linea": "LT TAP LO ESPEJO (FFCC) - LO ESPEJO (FFCC) 110 Kv",
-    "se1_nombre_bd": "S/E LO ESPEJO (FFCC)",
+    "se1_nombre_bd": "S/E TAP OFF LO ESPEJO (FFCC)",
     "se2_nombre_bd": "S/E LO ESPEJO (FFCC)",
-    "se1_abreviatura": "LESPFC",
+    "se1_abreviatura": "TLESPFC",
     "se2_abreviatura": "LESPFC",
-    "nombre_abreviado": "LESPFC-LESPFC"
+    "nombre_abreviado": "TLESPFC-LESPFC"
   },
   {
     "linea_id": 983,
@@ -7060,9 +7060,9 @@
     "nombre_linea": "LT TAP LOS DOMINICOS - LOS DOMINICOS 110kV",
     "se1_nombre_bd": "S/E LOS DOMINICOS",
     "se2_nombre_bd": "S/E LOS DOMINICOS",
-    "se1_abreviatura": "TODOMI",
-    "se2_abreviatura": "TODOMI",
-    "nombre_abreviado": "TODOMI-TODOMI"
+    "se1_abreviatura": "DOMI",
+    "se2_abreviatura": "DOMI",
+    "nombre_abreviado": "DOMI-DOMI"
   },
   {
     "linea_id": 985,
@@ -7105,18 +7105,18 @@
     "nombre_linea": "LT TAP PAJARITOS - PAJARITOS 110kV",
     "se1_nombre_bd": "S/E PAJARITOS",
     "se2_nombre_bd": "S/E PAJARITOS",
-    "se1_abreviatura": "TOPAJA",
-    "se2_abreviatura": "TOPAJA",
-    "nombre_abreviado": "TOPAJA-TOPAJA"
+    "se1_abreviatura": "PAJA",
+    "se2_abreviatura": "PAJA",
+    "nombre_abreviado": "PAJA-PAJA"
   },
   {
     "linea_id": 990,
     "nombre_linea": "LT TAP OFF PASO HONDO - PASO HONDO 66KV",
-    "se1_nombre_bd": "S/E PASO HONDO",
+    "se1_nombre_bd": "S/E TAP OFF PASO HONDO",
     "se2_nombre_bd": "S/E PASO HONDO",
     "se1_abreviatura": "TPHON",
-    "se2_abreviatura": "TPHON",
-    "nombre_abreviado": "TPHON-TPHON"
+    "se2_abreviatura": "PHON",
+    "nombre_abreviado": "TPHON-PHON"
   },
   {
     "linea_id": 991,
@@ -7157,11 +7157,11 @@
   {
     "linea_id": 996,
     "nombre_linea": "LT TAP OFF QUINTAY - QUINTAY 66KV",
-    "se1_nombre_bd": "S/E QUINTAY",
+    "se1_nombre_bd": "S/E TAP OFF QUINTAY",
     "se2_nombre_bd": "S/E QUINTAY",
-    "se1_abreviatura": "QTAY",
+    "se1_abreviatura": "TOTAY",
     "se2_abreviatura": "QTAY",
-    "nombre_abreviado": "QTAY-QTAY"
+    "nombre_abreviado": "TOTAY-QTAY"
   },
   {
     "linea_id": 997,
@@ -7229,11 +7229,11 @@
   {
     "linea_id": 1005,
     "nombre_linea": "LT TAP SANTA MARTA - SANTA MARTA 110kV",
-    "se1_nombre_bd": "S/E SANTA MARTA",
+    "se1_nombre_bd": "S/E TAP OFF SANTA MARTA",
     "se2_nombre_bd": "S/E SANTA MARTA",
-    "se1_abreviatura": "TOSMAR",
-    "se2_abreviatura": "TOSMAR",
-    "nombre_abreviado": "TOSMAR-TOSMAR"
+    "se1_abreviatura": "TOMAR",
+    "se2_abreviatura": "SMAR",
+    "nombre_abreviado": "TOMAR-SMAR"
   },
   {
     "linea_id": 1006,
@@ -7652,9 +7652,9 @@
   {
     "linea_id": 1063,
     "nombre_linea": "LT TAP PALACIOS - CENTRAL PALACIOS 23kV",
-    "se1_nombre_bd": null,
+    "se1_nombre_bd": "S/E TAP OFF PALACIOS",
     "se2_nombre_bd": null,
-    "se1_abreviatura": null,
+    "se1_abreviatura": "TOCIO",
     "se2_abreviatura": null,
     "nombre_abreviado": null
   },
@@ -7770,9 +7770,9 @@
     "linea_id": 1079,
     "nombre_linea": "LT TAP OFF LLANOS BLANCOS - TAP OFF LLANOS BLANCOS (ESTRUCTURA N°77) 220kV",
     "se1_nombre_bd": null,
-    "se2_nombre_bd": null,
+    "se2_nombre_bd": "S/E TAP OFF LLANOS BLANCOS (ESTRUCTURA N°77)",
     "se1_abreviatura": null,
-    "se2_abreviatura": null,
+    "se2_abreviatura": "TLB77",
     "nombre_abreviado": null
   },
   {
@@ -8084,7 +8084,7 @@
   {
     "linea_id": 1121,
     "nombre_linea": "LT EJERCITO - GUINDO 66 kV",
-    "se1_nombre_bd": "TAP EJERCITO",
+    "se1_nombre_bd": "S/E EJERCITO",
     "se2_nombre_bd": "S/E GUINDO",
     "se1_abreviatura": "EJE",
     "se2_abreviatura": null,
@@ -8327,11 +8327,11 @@
   {
     "linea_id": 1149,
     "nombre_linea": "LT TAP MAURO - MAURO 220KV",
-    "se1_nombre_bd": "S/E MAURO",
+    "se1_nombre_bd": "S/E TAP OFF MAURO",
     "se2_nombre_bd": "S/E MAURO",
-    "se1_abreviatura": "MAUR",
+    "se1_abreviatura": "TOMAU",
     "se2_abreviatura": "MAUR",
-    "nombre_abreviado": "MAUR-MAUR"
+    "nombre_abreviado": "TOMAU-MAUR"
   },
   {
     "linea_id": 1150,
@@ -8895,10 +8895,10 @@
     "linea_id": 1215,
     "nombre_linea": "LT LOS ANGELES (CGE) - TAP DUQUECO 66KV",
     "se1_nombre_bd": "S/E LOS ANGELES (CGE)",
-    "se2_nombre_bd": "S/E DUQUECO",
+    "se2_nombre_bd": "S/E TAP OFF DUQUECO",
     "se1_abreviatura": "LANFC",
-    "se2_abreviatura": "DUQ",
-    "nombre_abreviado": "LANFC-DUQ"
+    "se2_abreviatura": "TODUQ",
+    "nombre_abreviado": "LANFC-TODUQ"
   },
   {
     "linea_id": 1216,
@@ -8948,11 +8948,11 @@
   {
     "linea_id": 1221,
     "nombre_linea": "LT TAP OFF NIHUE - LA MANGA 66KV C1",
-    "se1_nombre_bd": null,
+    "se1_nombre_bd": "S/E TAP OFF NIHUE",
     "se2_nombre_bd": "S/E LA MANGA",
-    "se1_abreviatura": null,
+    "se1_abreviatura": "TONIH",
     "se2_abreviatura": "LMAN",
-    "nombre_abreviado": null
+    "nombre_abreviado": "TONIH-LMAN"
   },
   {
     "linea_id": 1222,
@@ -9210,10 +9210,10 @@
     "linea_id": 1254,
     "nombre_linea": "LT REGULADORA RAPEL - TAP OFF NIHUE 66KV",
     "se1_nombre_bd": "S/E REGULADORA RAPEL",
-    "se2_nombre_bd": null,
+    "se2_nombre_bd": "S/E TAP OFF NIHUE",
     "se1_abreviatura": "RPEL",
-    "se2_abreviatura": null,
-    "nombre_abreviado": null
+    "se2_abreviatura": "TONIH",
+    "nombre_abreviado": "RPEL-TONIH"
   },
   {
     "linea_id": 1255,
@@ -9281,11 +9281,11 @@
   {
     "linea_id": 1262,
     "nombre_linea": "LT TAP EL NEGRO - TAP OFF EL NEGRO 110KV",
-    "se1_nombre_bd": null,
-    "se2_nombre_bd": null,
-    "se1_abreviatura": null,
-    "se2_abreviatura": null,
-    "nombre_abreviado": null
+    "se1_nombre_bd": "S/E TAP OFF EL NEGRO",
+    "se2_nombre_bd": "S/E TAP OFF EL NEGRO",
+    "se1_abreviatura": "TONEG",
+    "se2_abreviatura": "TONEG",
+    "nombre_abreviado": "TONEG-TONEG"
   },
   {
     "linea_id": 1263,
@@ -9671,7 +9671,7 @@
     "se1_nombre_bd": "S/E TAMANGO",
     "se2_nombre_bd": "S/E PASO HONDO",
     "se1_abreviatura": null,
-    "se2_abreviatura": "TPHON",
+    "se2_abreviatura": "PHON",
     "nombre_abreviado": null
   },
   {
@@ -10335,7 +10335,7 @@
     "linea_id": 1391,
     "nombre_linea": "LT CENTRAL LAS NIEVES - TAP OFF LAS NIEVES 23kV",
     "se1_nombre_bd": "S/E CENTRAL LAS NIEVES",
-    "se2_nombre_bd": null,
+    "se2_nombre_bd": "S/E TAP OFF LAS NIEVES",
     "se1_abreviatura": null,
     "se2_abreviatura": null,
     "nombre_abreviado": null
@@ -10397,9 +10397,9 @@
   {
     "linea_id": 1399,
     "nombre_linea": "LT TAP OFF NUEVA VICTORIA - PRINCIPAL TEA 66kV",
-    "se1_nombre_bd": null,
+    "se1_nombre_bd": "S/E TAP OFF NUEVA VICTORIA",
     "se2_nombre_bd": "S/E PRINCIPAL TEA",
-    "se1_abreviatura": null,
+    "se1_abreviatura": "TONVI",
     "se2_abreviatura": null,
     "nombre_abreviado": null
   },

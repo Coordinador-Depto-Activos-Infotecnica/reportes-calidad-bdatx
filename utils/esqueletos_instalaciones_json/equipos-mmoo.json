@@ -1,0 +1,15 @@
+{
+    "id": 0,
+    "ref_id": "string",
+    "name": "string",
+    "description": "string",
+    "status": "string",
+    "armario_id": "string",
+    "propietario_id": "string",
+    "decreto_id": "string",
+    "categoria_vu_id": "string",
+    "datasheet": {
+        "nivelTension": "string",
+        "ESTADO_CERTIFICACION": {}
+    }
+}

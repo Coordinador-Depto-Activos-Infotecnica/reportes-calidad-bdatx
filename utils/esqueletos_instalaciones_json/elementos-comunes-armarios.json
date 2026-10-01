@@ -1,0 +1,75 @@
+{
+    "id": 0,
+    "inf_id": 0,
+    "ref_id": "string",
+    "name": "string",
+    "description": "string",
+    "status": "string",
+    "armario_id": "string",
+    "propietario_id": "string",
+    "decreto_id": "string",
+    "categoria_vu_id": "string",
+    "validacionbbdd": 0,
+    "validacionactivos": 0,
+    "datasheet": {
+        "gps": {
+            "marca": "string",
+            "modelo": "string",
+            "cantidad": 0
+        },
+        "hmi": {
+            "marca": "string",
+            "modelo": "string",
+            "cantidad": 0
+        },
+        "router": {
+            "marca": "string",
+            "modelo": "string",
+            "cantidad": 0
+        },
+        "inversor": {
+            "marca": "string",
+            "modelo": "string",
+            "cantidad": 0
+        },
+        "blockPruebas": {
+            "marca": "string",
+            "modelo": "string",
+            "cantidad": 0
+        },
+        "switchControl": {
+            "marca": "string",
+            "modelo": "string",
+            "cantidad": 0
+        },
+        "conversorUtpfo": {
+            "marca": "string",
+            "modelo": "string",
+            "cantidad": 0
+        },
+        "cuchillaTipoFt": {
+            "marca": "string",
+            "modelo": "string",
+            "cantidad": 0
+        },
+        "ESTADO_CERTIFICACION": {},
+        "switchComunicaciones": {
+            "marca": "string",
+            "modelo": "string",
+            "cantidad": 0
+        },
+        "unidadTerminalRemota": {
+            "marca": "string",
+            "modelo": "string",
+            "cantidad": 0
+        },
+        "controladorTemperatura": false,
+        "fechaEntradaEnOperacion": "string",
+        "distribuidorFibrasOpticas": {
+            "marca": "string",
+            "modelo": "string",
+            "cantidad": 0
+        },
+        "cantidadBarrasCuParaPuestaTierra": 0
+    }
+}

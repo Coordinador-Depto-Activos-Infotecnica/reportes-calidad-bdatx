@@ -17,13 +17,13 @@ import unicodedata
 import pandas as pd
 import psycopg2
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, BASE_DIR)
 
 import config
 
 DB_CONN = config.DB_CONN
-UTILS_DIR = os.path.dirname(os.path.abspath(__file__))
+UTILS_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 UTILS_DOCS_DIR = os.path.join(UTILS_DIR, "docs")
 ABREVIATURAS_SSEE_PATH = os.path.join(UTILS_DIR, "abreviaturas_ssee.json")
 ABREVIATURA_LINEA_JSON_PATH = os.path.join(UTILS_DIR, "abreviatura_linea.json")
@@ -44,6 +44,21 @@ def normaliza_nombre(nombre):
     texto = nombre.upper().strip()
     texto = unicodedata.normalize('NFKD', texto).encode('ascii', 'ignore').decode('ascii')
     texto = RE_PREFIJO_SE.sub('', texto)
+    texto = re.sub(r'\s+', ' ', texto).strip()
+    return texto
+
+
+def normaliza_canonica(nombre):
+    """Normaliza un nombre de subestacion preservando el caracter de TAP:
+    mayusculas, sin tildes, quita solo el prefijo S/E y unifica "TAP OFF" y
+    "TAP" a "TAP". Asi "S/E TAP OFF X" y "TAP OFF X" coinciden entre si, pero
+    no colisionan con "S/E X"."""
+    if not nombre:
+        return ""
+    texto = nombre.upper().strip()
+    texto = unicodedata.normalize('NFKD', texto).encode('ascii', 'ignore').decode('ascii')
+    texto = re.sub(r'^S/E\s+', '', texto)
+    texto = re.sub(r'^TAP OFF\s+|^TAP\s+', 'TAP ', texto)
     texto = re.sub(r'\s+', ' ', texto).strip()
     return texto
 
@@ -75,16 +90,21 @@ def cargar_datos(conn):
 
 
 def construye_mapa_subestaciones(subestaciones):
-    mapa = {}
+    """Devuelve (mapa_canonico, mapa_respaldo). El canonico preserva el TAP y
+    se usa primero; el respaldo mantiene el comportamiento historico
+    (eliminando tambien TAP OFF/TAP) para las subestaciones sin su par TAP."""
+    mapa_canonico = {}
+    mapa_respaldo = {}
     for sub_id, nombre in subestaciones:
-        clave = normaliza_nombre(nombre)
-        mapa.setdefault(clave, []).append((sub_id, nombre))
-    return mapa
+        mapa_canonico.setdefault(normaliza_canonica(nombre), []).append((sub_id, nombre))
+        mapa_respaldo.setdefault(normaliza_nombre(nombre), []).append((sub_id, nombre))
+    return mapa_canonico, mapa_respaldo
 
 
-def busca_subestacion(nombre_extraido, mapa_subestaciones):
-    clave = normaliza_nombre(nombre_extraido)
-    candidatos = mapa_subestaciones.get(clave)
+def busca_subestacion(nombre_extraido, mapa_canonico, mapa_respaldo):
+    candidatos = mapa_canonico.get(normaliza_canonica(nombre_extraido))
+    if not candidatos:
+        candidatos = mapa_respaldo.get(normaliza_nombre(nombre_extraido))
     if not candidatos:
         return None, None
     sub_id, nombre_real = candidatos[0]
@@ -92,20 +112,32 @@ def busca_subestacion(nombre_extraido, mapa_subestaciones):
 
 
 def cargar_abreviaturas_ssee(ruta=ABREVIATURAS_SSEE_PATH):
+    """Devuelve (mapa_por_nombre, mapa_por_id). El mapa por id BDATx es el
+    preferente porque evita colisiones de nombres homonimos."""
     with open(ruta, "r", encoding="utf-8") as f:
         registros = json.load(f)
-    mapa = {}
+    mapa_por_nombre = {}
+    mapa_por_id = {}
     for registro in registros:
         nombre = registro.get("Nombre SSEE")
         abreviatura = registro.get("Abreviatura")
-        if not nombre or not abreviatura:
+        if not abreviatura:
             continue
-        clave = normaliza_nombre(nombre)
-        mapa.setdefault(clave, abreviatura)
-    return mapa
+        if nombre:
+            mapa_por_nombre.setdefault(normaliza_nombre(nombre), abreviatura)
+        id_bdatx = registro.get("id BDATx")
+        if nombre and id_bdatx not in (None, "", 0, "0"):
+            mapa_por_id.setdefault(id_bdatx, (nombre, abreviatura))
+    return mapa_por_nombre, mapa_por_id
 
 
-def busca_abreviatura(nombre_bd, nombre_extraido, mapa_abreviaturas):
+def busca_abreviatura(se_id, nombre_bd, nombre_extraido, mapa_abreviaturas, mapa_abreviaturas_id):
+    if se_id is not None:
+        registro = mapa_abreviaturas_id.get(se_id)
+        if registro:
+            nombre_reg, abreviatura = registro
+            if normaliza_canonica(nombre_reg) == normaliza_canonica(nombre_bd):
+                return abreviatura
     for nombre in (nombre_bd, nombre_extraido):
         clave = normaliza_nombre(nombre)
         if clave in mapa_abreviaturas:
@@ -113,7 +145,7 @@ def busca_abreviatura(nombre_bd, nombre_extraido, mapa_abreviaturas):
     return None
 
 
-def construye_dataframe(lineas, mapa_subestaciones, mapa_abreviaturas):
+def construye_dataframe(lineas, mapa_canonico, mapa_respaldo, mapa_abreviaturas, mapa_abreviaturas_id):
     filas = []
     for linea_id, nombre in lineas:
         partes = parsea_nombre_linea(nombre)
@@ -136,16 +168,16 @@ def construye_dataframe(lineas, mapa_subestaciones, mapa_abreviaturas):
         }
         if partes is not None:
             fila.update(partes)
-            se1_id, se1_nombre_bd = busca_subestacion(partes["se1_extraida"], mapa_subestaciones)
-            se2_id, se2_nombre_bd = busca_subestacion(partes["se2_extraida"], mapa_subestaciones)
+            se1_id, se1_nombre_bd = busca_subestacion(partes["se1_extraida"], mapa_canonico, mapa_respaldo)
+            se2_id, se2_nombre_bd = busca_subestacion(partes["se2_extraida"], mapa_canonico, mapa_respaldo)
             fila["se1_id"] = se1_id
             fila["se1_nombre_bd"] = se1_nombre_bd
             fila["se2_id"] = se2_id
             fila["se2_nombre_bd"] = se2_nombre_bd
             fila["match_completo"] = se1_id is not None and se2_id is not None
 
-            se1_abrev = busca_abreviatura(se1_nombre_bd, partes["se1_extraida"], mapa_abreviaturas)
-            se2_abrev = busca_abreviatura(se2_nombre_bd, partes["se2_extraida"], mapa_abreviaturas)
+            se1_abrev = busca_abreviatura(se1_id, se1_nombre_bd, partes["se1_extraida"], mapa_abreviaturas, mapa_abreviaturas_id)
+            se2_abrev = busca_abreviatura(se2_id, se2_nombre_bd, partes["se2_extraida"], mapa_abreviaturas, mapa_abreviaturas_id)
             fila["se1_abreviatura"] = se1_abrev
             fila["se2_abreviatura"] = se2_abrev
             if se1_abrev and se2_abrev:
@@ -182,9 +214,9 @@ def main():
     finally:
         conn.close()
 
-    mapa_subestaciones = construye_mapa_subestaciones(subestaciones)
-    mapa_abreviaturas = cargar_abreviaturas_ssee()
-    df = construye_dataframe(lineas, mapa_subestaciones, mapa_abreviaturas)
+    mapa_canonico, mapa_respaldo = construye_mapa_subestaciones(subestaciones)
+    mapa_abreviaturas, mapa_abreviaturas_id = cargar_abreviaturas_ssee()
+    df = construye_dataframe(lineas, mapa_canonico, mapa_respaldo, mapa_abreviaturas, mapa_abreviaturas_id)
 
     ruta_salida = os.path.join(UTILS_DOCS_DIR, "lineas_abreviadas.xlsx")
     genera_excel(df, ruta_salida)

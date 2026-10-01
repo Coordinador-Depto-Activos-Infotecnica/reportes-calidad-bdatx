@@ -1,0 +1,45 @@
+{
+    "id": 0,
+    "inf_id": 0,
+    "ref_id": "string",
+    "name": "string",
+    "description": "string",
+    "status": "string",
+    "patio_subestacion_id": "string",
+    "propietario_id": "string",
+    "decreto_id": "string",
+    "categoria_vu_id": "string",
+    "estructura_ssee": [],
+    "oocc": [],
+    "validacionbbdd": 0,
+    "validacionactivos": 0,
+    "datasheet": {
+        "extremo1": {
+            "idPano": "string",
+            "idBarra": "string",
+            "idTramo": "string",
+            "idTransformador2Devanados": "string",
+            "idTransformador3Devanados": "string"
+        },
+        "extremo2": {
+            "idPano": "string",
+            "idBarra": "string",
+            "idTramo": "string",
+            "idTransformador2Devanados": "string",
+            "idTransformador3Devanados": "string"
+        },
+        "funcionPano": "string",
+        "nivelTension": "string",
+        "tipoConductor": "string",
+        "tipoTecnologia": "string",
+        "ESTADO_CERTIFICACION": {},
+        "tipoSistemaProteccion": "string",
+        "nemaProteccionSistema1": "string",
+        "nemaProteccionSistema2": "string",
+        "tipoProteccionAsociada": "string",
+        "fechaEntradaEnOperacion": "string",
+        "numeroSistemasProteccion": 0,
+        "antecedentesComplementarios": 0,
+        "planosDetallesMontajeParaAlumbradoCanalizacionesYSistemasPuestaTierra": 0
+    }
+}

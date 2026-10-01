@@ -1,0 +1,28 @@
+{
+    "id": 0,
+    "ref_id": "string",
+    "name": "string",
+    "description": "string",
+    "status": "string",
+    "casa_servicios_generales_id": "string",
+    "propietario_id": "string",
+    "decreto_id": "string",
+    "categoria_vu_id": "string",
+    "estructura_ssee": [],
+    "oocc": [],
+    "validacionbbdd": 0,
+    "validacionactivos": 0,
+    "datasheet": {
+        "pasos": 0,
+        "tipoConexion": "string",
+        "anoFabricacion": 0,
+        "tensionNominal": "string",
+        "capacidadNominal": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "tecnologiaBateria": "string",
+        "ESTADO_CERTIFICACION": {},
+        "fechaEntradaEnOperacion": "string"
+    }
+}

@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 """
 Genera un informe Word y PDF por empresa con el formato de referencia
-(banner, tarjetas KPI y dos secciones), usando las observaciones consolidadas
-por reporte_observaciones_empresa.py (su misma fuente de datos).
+(banner, tarjetas KPI y tres secciones), usando las observaciones consolidadas
+por reporte_observaciones_empresa.py (misma fuente que el Excel y BD_errores).
 
-La agrupación de las reglas (Revisión General / Revisión Específica) proviene
-del catálogo canónico definido en reporte_observaciones_empresa.CATALOGO.
+La agrupación de las reglas (Revisión General / Revisión Específica / Revisión
+de anexos Líneas y Subestaciones) proviene del catálogo canónico definido en
+reporte_observaciones_empresa.CATALOGO, que refleja
+criterios-revision/criterio_revision_validacion.md.
 """
 
 import os
@@ -210,12 +212,12 @@ TABLAS_HERENCIA = [
     "api_circuito",
 ]
 
-TABLA_INSTALACION = {
-    "Vano": "api_vano",
-    "Torre": "api_torre",
-    "Marcolinea": "api_marcolinea",
-    "Tramo": "api_tramo",
-    "Patio": "api_patiosubestacion",
+DOMINIOS_ESPECIFICOS = {
+    "Patio": ["api_patiosubestacion", "api_barra", "api_pano"],
+    "Vano": ["api_vano"],
+    "Torre": ["api_torre"],
+    "Marcolinea": ["api_marcolinea"],
+    "Tramo": ["api_tramo"],
 }
 
 UNIVERSOS_ESPECIFICOS = {
@@ -228,7 +230,6 @@ UNIVERSOS_ESPECIFICOS = {
     "MARCO_SIN_OOCC": ["api_marcolinea"],
     "MARCO_SIN_ACCESORIOS": ["api_marcolinea"],
     "TRAMO_NODOS_IGUALES": ["api_tramo"],
-    "TRAMO_NOMBRE_NODOS_NO_COINCIDEN": ["api_tramo"],
     "BARRA_TENSION_NO_COINCIDE": ["api_barra"],
     "PANO_TENSION_NO_COINCIDE": ["api_pano"],
     "PATIO_TENSION_NO_IDENTIFICADA": ["api_patiosubestacion"],
@@ -241,8 +242,15 @@ def _totales_excel(archivo):
     return dict(zip(df["empresa"], df["total_registros"])) if not df.empty else {}
 
 
-def _contar_tablas_por_empresa(conn, tablas):
+CODIGOS_ANEXOS = ["DOCUMENTO_FALTANTE", "DOCUMENTO_NO_EXISTE", "DOCUMENTO_INCORRECTO"]
+ANEXOS_POR_TABLA = [("Subestación", "api_subestacion"), ("Línea", "api_linea")]
+
+def _contar_tablas_por_empresa(conn, tablas, where_extra=""):
     """Suma los registros EN_OPERACION por empresa en las tablas indicadas."""
+    condicion = "status='EN_OPERACION'"
+    if where_extra:
+        condicion += f" AND {where_extra}"
+
     cur = conn.cursor()
     cur.execute("SELECT id, name FROM api_empresa")
     empresa_map = {_clean(r[0]): r[1] for r in cur.fetchall()}
@@ -253,7 +261,7 @@ def _contar_tablas_por_empresa(conn, tablas):
         try:
             df = pd.read_sql(
                 f'SELECT propietario_id, COUNT(*) AS n FROM "{t}" '
-                f"WHERE status='EN_OPERACION' GROUP BY propietario_id",
+                f"WHERE {condicion} GROUP BY propietario_id",
                 conn,
             )
         except Exception:
@@ -311,9 +319,13 @@ def cargar_universos():
             "Revisión de sufijos": _contar_tablas_por_empresa(conn, TABLAS_SUFIJO),
             "Revisión de escritura general": _contar_tablas_por_empresa(conn, _tablas_escritura(conn)),
             "Conectividad de circuitos": _contar_tablas_por_empresa(conn, TABLAS_CONECTIVIDAD),
+            "Anexos": {
+                "Subestación": _contar_tablas_por_empresa(conn, ["api_subestacion"], "datasheet IS NOT NULL"),
+                "Línea": _contar_tablas_por_empresa(conn, ["api_linea"], "datasheet IS NOT NULL"),
+            },
         }
-        for instalacion, tabla in TABLA_INSTALACION.items():
-            u[instalacion] = _contar_tablas_por_empresa(conn, [tabla])
+        for instalacion, tablas in DOMINIOS_ESPECIFICOS.items():
+            u[instalacion] = _contar_tablas_por_empresa(conn, tablas)
         for codigo, tablas in UNIVERSOS_ESPECIFICOS.items():
             u[codigo] = _contar_tablas_por_empresa(conn, tablas)
         u["ABREVIATURA_LINEA_VANO"] = _totales_excel("revision_abreviatura_vano.xlsx")
@@ -323,65 +335,94 @@ def cargar_universos():
 
 
 def cargar_datos():
-    """Consolida las observaciones (fuente única) y calcula los conteos por
-    empresa y código, junto con los registros totales (base EN_OPERACION)."""
+    """Consolida las observaciones (fuente única) y devuelve el detalle crudo,
+    los registros totales (base EN_OPERACION) y las empresas con hallazgos."""
     df = roe.consolidar_observaciones()
-
-    if not df.empty:
-        conteo = df.groupby(["propietario_name", "observacion"]).size().reset_index(name="n")
-    else:
-        conteo = pd.DataFrame(columns=["propietario_name", "observacion", "n"])
-
     registros_totales = {k: int(v) for k, v in cargar_total_registros().items()}
-
-    empresas = sorted(e for e in set(conteo["propietario_name"]) if e)
-
-    return conteo, registros_totales, empresas
+    empresas = sorted(e for e in set(df["propietario_name"]) if e) if not df.empty else []
+    return df, registros_totales, empresas
 
 
-def _filas_empresa(conteo, empresa):
-    if conteo.empty:
+def _sets_por_codigo(df_emp):
+    """{codigo: set de (tipo_instalacion, id)} para una empresa (sin ids vacíos)."""
+    if df_emp.empty:
         return {}
-    sub = conteo[conteo["propietario_name"] == empresa]
-    return dict(zip(sub["observacion"], sub["n"]))
+    d = df_emp.copy()
+    d["_id_norm"] = d["id"].map(roe.normalizar_id)
+    d = d[d["_id_norm"] != ""]
+    return {
+        str(codigo): set(zip(g["tipo_instalacion"], g["_id_norm"]))
+        for codigo, g in d.groupby("observacion")
+    }
 
 
-def _resumen_grupos(filas):
-    """Devuelve (general, especifica) como listas de (subcategoria, cantidad)."""
-    general = []
-    especifica = []
-    for entry in roe.CATALOGO:
-        n = sum(filas.get(c, 0) for c in entry["codigos"])
-        if entry["grupo"] == "General":
-            general.append((entry["subcategoria"], n))
-        else:
-            especifica.append((entry["subcategoria"], n))
-    return general, especifica
+def _union_instalaciones(sets_por_codigo, codigos, tipos=None):
+    """Cantidad de instalaciones distintas (tipo, id) presentes en `codigos`."""
+    unidas = set()
+    for c in codigos:
+        for tipo, idn in sets_por_codigo.get(str(c), ()):
+            if tipos is None or tipo in tipos:
+                unidas.add((tipo, idn))
+    return len(unidas)
 
 
-def _resumen_especifico(filas):
-    """Agrupa la Revisión Específica por instalación (Patio/Vano/Torre/Marcolinea/Tramo).
+def metricas_empresa(df_emp):
+    """Conteos de instalaciones distintas (tipo, id) por ítem del informe.
 
-    Devuelve una lista de diccionarios {instalacion, reglas, total}, incluyendo
-    solo instalaciones con total > 0 y, dentro, solo reglas con afectados > 0.
-    Cada regla es (codigo, etiqueta, cantidad).
+    Cada fila cuenta instalaciones únicas (unión de sus códigos); el total de
+    inconsistencias es la unión de todas las observaciones de la empresa.
     """
-    resultado = []
+    spc = _sets_por_codigo(df_emp)
+
+    general = {
+        entry["subcategoria"]: _union_instalaciones(spc, entry["codigos"])
+        for entry in roe.CATALOGO
+        if entry["grupo"] == "General"
+    }
+
+    especifica = {}
+    especifica_reglas = {}
     for grupo in roe.ESPECIFICAS_POR_INSTALACION:
-        reglas = []
-        total = 0
-        for codigo, etiqueta in grupo["reglas"]:
-            n = filas.get(codigo, 0)
-            if n:
-                reglas.append((codigo, etiqueta, n))
-                total += n
-        if total:
-            resultado.append({
-                "instalacion": grupo["instalacion"],
-                "reglas": reglas,
-                "total": total,
-            })
-    return resultado
+        inst = grupo["instalacion"]
+        especifica[inst] = _union_instalaciones(spc, [c for c, _ in grupo["reglas"]])
+        for codigo, _ in grupo["reglas"]:
+            especifica_reglas[(inst, codigo)] = _union_instalaciones(spc, [codigo])
+
+    anexos = {
+        tabla: _union_instalaciones(spc, CODIGOS_ANEXOS, tipos={tabla})
+        for _etiq, tabla in ANEXOS_POR_TABLA
+    }
+
+    todas = set()
+    for s in spc.values():
+        todas |= s
+
+    return {
+        "general": general,
+        "especifica": especifica,
+        "especifica_reglas": especifica_reglas,
+        "anexos": anexos,
+        "inconsistencias": len(todas),
+    }
+
+
+def _tabla_subcategorias(doc, titulo, filas):
+    """Agrega una sección con la tabla Criterio / Errores / % Error.
+
+    `filas` es una lista de tuplas (etiqueta, errores, denominador).
+    """
+    add_section_header(doc, titulo)
+    tabla = doc.add_table(rows=1 + len(filas), cols=3)
+    tabla.alignment = WD_TABLE_ALIGNMENT.CENTER
+    set_table_borders(tabla)
+    for col_idx, (h_text, w) in enumerate([("Criterio / Regla de Calidad", 4.4), ("Instalaciones observadas", 1.3), ("% Error", 1.0)]):
+        style_header_cell(tabla.cell(0, col_idx), h_text, w)
+
+    for row_idx, (etiqueta, n, denom) in enumerate(filas, start=1):
+        bg = "F8FAFC" if row_idx % 2 == 0 else "FFFFFF"
+        style_data_cell(tabla.cell(row_idx, 0), etiqueta, 4.4, bg_hex=bg)
+        style_data_cell(tabla.cell(row_idx, 1), _fmt(n), 1.3, align=WD_ALIGN_PARAGRAPH.CENTER, bg_hex=bg)
+        style_data_cell(tabla.cell(row_idx, 2), _pct(n, denom), 1.0, align=WD_ALIGN_PARAGRAPH.CENTER, bg_hex=bg)
 
 
 def sanitizar_nombre(nombre):
@@ -395,12 +436,13 @@ def _fmt(n):
 
 
 def _pct(e, t):
-    return f"{e / t * 100:.2f}%" if t else "0.00%"
+    return f"{min(100.0, e / t * 100):.2f}%" if t else "0.00%"
 
 
 # --- GENERACIÓN DE WORD ---
 
-def generar_documento(empresa, filas, registros_totales, universos, carpeta_word):
+def generar_documento(empresa, metricas, registros_totales, universos, carpeta_word,
+                      etiqueta_meta=None):
     doc = docx.Document()
 
     for section in doc.sections:
@@ -417,10 +459,33 @@ def generar_documento(empresa, filas, registros_totales, universos, carpeta_word
     fecha = config.fecha_bd_str("%d/%m/%Y")
 
     total = registros_totales.get(empresa, 0)
-    inconsistencias = sum(filas.values())
+    inconsistencias = metricas["inconsistencias"]
 
-    general, _ = _resumen_grupos(filas)
-    especifico = _resumen_especifico(filas)
+    filas_general = [
+        (entry["subcategoria"], metricas["general"].get(entry["subcategoria"], 0),
+         universos.get(entry["subcategoria"], {}).get(empresa, 0))
+        for entry in roe.CATALOGO
+        if entry["grupo"] == "General"
+    ]
+
+    u_anexos = universos.get("Anexos", {})
+    filas_anexos = [
+        (etiqueta, metricas["anexos"].get(tabla, 0), u_anexos.get(etiqueta, {}).get(empresa, 0))
+        for etiqueta, tabla in ANEXOS_POR_TABLA
+    ]
+
+    especifico = []
+    for grupo in roe.ESPECIFICAS_POR_INSTALACION:
+        inst = grupo["instalacion"]
+        total_inst = metricas["especifica"].get(inst, 0)
+        if not total_inst:
+            continue
+        reglas = [
+            (codigo, etiqueta, metricas["especifica_reglas"].get((inst, codigo), 0))
+            for codigo, etiqueta in grupo["reglas"]
+            if metricas["especifica_reglas"].get((inst, codigo), 0)
+        ]
+        especifico.append({"instalacion": inst, "reglas": reglas, "total": total_inst})
 
     salud = round(max(0.0, 1 - inconsistencias / total) * 100, 2) if total else 100.0
 
@@ -454,8 +519,9 @@ def generar_documento(empresa, filas, registros_totales, universos, carpeta_word
     p_meta.alignment = WD_ALIGN_PARAGRAPH.RIGHT
     p_meta.paragraph_format.space_after = Pt(0)
     p_meta.paragraph_format.line_spacing = 1.2
+    meta = etiqueta_meta or f"Empresa: {empresa}"
     run_meta = p_meta.add_run(
-        f"Empresa: {empresa}\n"
+        f"{meta}\n"
         f"Fecha de Corte: {fecha}\n"
         f"Estado: Operativo e IRATx\n"
         f"Registros Totales: {_fmt(total)}"
@@ -471,7 +537,7 @@ def generar_documento(empresa, filas, registros_totales, universos, carpeta_word
     kpi_data = [
         (f"{salud:.2f}%", "Salud Global", RGBColor(22, 163, 74)),
         (_fmt(total), "Registros Evaluados", RGBColor(15, 23, 42)),
-        (_fmt(inconsistencias), "Inconsistencias", RGBColor(220, 38, 38)),
+        (_fmt(inconsistencias), "Instalaciones observadas", RGBColor(220, 38, 38)),
     ]
 
     for i, (val, lbl, color) in enumerate(kpi_data):
@@ -498,19 +564,7 @@ def generar_documento(empresa, filas, registros_totales, universos, carpeta_word
     doc.add_paragraph().paragraph_format.space_after = Pt(10)
 
     # 3. Sección 1: Revisión General
-    add_section_header(doc, "1. Revisión General")
-    t1 = doc.add_table(rows=1 + len(general), cols=3)
-    t1.alignment = WD_TABLE_ALIGNMENT.CENTER
-    set_table_borders(t1)
-    for col_idx, (h_text, w) in enumerate([("Criterio / Regla de Calidad", 4.7), ("Errores", 0.9), ("% Error", 1.0)]):
-        style_header_cell(t1.cell(0, col_idx), h_text, w)
-
-    for row_idx, (subcategoria, n) in enumerate(general, start=1):
-        bg = "F8FAFC" if row_idx % 2 == 0 else "FFFFFF"
-        denom = universos.get(subcategoria, {}).get(empresa, 0)
-        style_data_cell(t1.cell(row_idx, 0), subcategoria, 4.7, bg_hex=bg)
-        style_data_cell(t1.cell(row_idx, 1), _fmt(n), 0.9, align=WD_ALIGN_PARAGRAPH.CENTER, bg_hex=bg)
-        style_data_cell(t1.cell(row_idx, 2), _pct(n, denom), 1.0, align=WD_ALIGN_PARAGRAPH.CENTER, bg_hex=bg)
+    _tabla_subcategorias(doc, "1. Revisión General", filas_general)
 
     # 4. Sección 2: Revisión Específica (agrupada por instalación)
     add_section_header(doc, "2. Revisión Específica")
@@ -518,24 +572,27 @@ def generar_documento(empresa, filas, registros_totales, universos, carpeta_word
     t3 = doc.add_table(rows=1 + n_filas_esp, cols=3)
     t3.alignment = WD_TABLE_ALIGNMENT.CENTER
     set_table_borders(t3)
-    for col_idx, (h_text, w) in enumerate([("Regla Específica", 4.7), ("Afectados", 0.9), ("% Error", 1.0)]):
+    for col_idx, (h_text, w) in enumerate([("Regla Específica", 4.4), ("Instalaciones observadas", 1.3), ("% Error", 1.0)]):
         style_header_cell(t3.cell(0, col_idx), h_text, w)
 
     row_idx = 1
     for g in especifico:
         bg_g = "E2E8F0"
         denom_grupo = universos.get(g["instalacion"], {}).get(empresa, 0)
-        style_data_cell(t3.cell(row_idx, 0), g["instalacion"], 4.7, bold=True, bg_hex=bg_g)
-        style_data_cell(t3.cell(row_idx, 1), _fmt(g["total"]), 0.9, align=WD_ALIGN_PARAGRAPH.CENTER, bold=True, bg_hex=bg_g)
+        style_data_cell(t3.cell(row_idx, 0), g["instalacion"], 4.4, bold=True, bg_hex=bg_g)
+        style_data_cell(t3.cell(row_idx, 1), _fmt(g["total"]), 1.3, align=WD_ALIGN_PARAGRAPH.CENTER, bold=True, bg_hex=bg_g)
         style_data_cell(t3.cell(row_idx, 2), _pct(g["total"], denom_grupo), 1.0, align=WD_ALIGN_PARAGRAPH.CENTER, bold=True, bg_hex=bg_g)
         row_idx += 1
         for j, (codigo, etiqueta, n) in enumerate(g["reglas"]):
             bg = "F8FAFC" if j % 2 == 0 else "FFFFFF"
             denom = universos.get(codigo, universos.get(g["instalacion"], {})).get(empresa, 0)
-            style_data_cell(t3.cell(row_idx, 0), "    " + etiqueta, 4.7, bg_hex=bg)
-            style_data_cell(t3.cell(row_idx, 1), _fmt(n), 0.9, align=WD_ALIGN_PARAGRAPH.CENTER, bg_hex=bg)
+            style_data_cell(t3.cell(row_idx, 0), "    " + etiqueta, 4.4, bg_hex=bg)
+            style_data_cell(t3.cell(row_idx, 1), _fmt(n), 1.3, align=WD_ALIGN_PARAGRAPH.CENTER, bg_hex=bg)
             style_data_cell(t3.cell(row_idx, 2), _pct(n, denom), 1.0, align=WD_ALIGN_PARAGRAPH.CENTER, bg_hex=bg)
             row_idx += 1
+
+    # 5. Sección 3: Revisión de anexos Líneas y Subestaciones
+    _tabla_subcategorias(doc, "3. Revisión de anexos Líneas y Subestaciones", filas_anexos)
 
     doc.add_paragraph().paragraph_format.space_after = Pt(8)
 
@@ -543,28 +600,92 @@ def generar_documento(empresa, filas, registros_totales, universos, carpeta_word
     doc.save(ruta)
 
 
-def convertir_a_pdf(carpeta_word, carpeta_pdf):
+def _abrir_word():
     import win32com.client
 
-    word = win32com.client.Dispatch("Word.Application")
+    try:
+        word = win32com.client.DispatchEx("Word.Application")
+    except Exception:
+        word = win32com.client.Dispatch("Word.Application")
     word.Visible = False
     try:
-        for nombre in os.listdir(carpeta_word):
-            if not nombre.lower().endswith(".docx"):
+        word.DisplayAlerts = 0
+    except Exception:
+        pass
+    return word
+
+
+def convertir_a_pdf(carpeta_word, carpeta_pdf, intentos=2):
+    """Convierte a PDF los .docx de `carpeta_word`.
+
+    Solo convierte los que aún no tienen PDF (permite reejecutar y completar
+    faltantes). Cada archivo se procesa de forma independiente, de modo que un
+    error en uno no impide convertir el resto; los fallidos se reintentan.
+    Un archivo se considera fallido **solo si su PDF no quedó en disco**.
+    Devuelve un resumen {word, pdf, fallidos}.
+    """
+    os.makedirs(carpeta_pdf, exist_ok=True)
+
+    def _listar_pendientes():
+        pend = []
+        for nombre in sorted(os.listdir(carpeta_word)):
+            if not nombre.lower().endswith(".docx") or nombre.startswith("~$"):
                 continue
-            origen = os.path.join(carpeta_word, nombre)
             destino = os.path.join(carpeta_pdf, nombre[:-5] + ".pdf")
-            documento = word.Documents.Open(origen)
+            if not os.path.exists(destino):
+                pend.append((nombre, os.path.abspath(os.path.join(carpeta_word, nombre)), os.path.abspath(destino)))
+        return pend
+
+    pendientes = _listar_pendientes()
+    errores = {}
+    for intento in range(1, max(1, intentos) + 1):
+        if not pendientes:
+            break
+        word = _abrir_word()
+        try:
+            for nombre, origen, destino in pendientes:
+                try:
+                    documento = word.Documents.Open(origen)
+                    try:
+                        documento.SaveAs(destino, FileFormat=17)
+                    finally:
+                        documento.Close(False)
+                except Exception as e:
+                    errores[nombre] = str(e)
+        finally:
             try:
-                documento.SaveAs(destino, FileFormat=17)
-            finally:
-                documento.Close(False)
-    finally:
-        word.Quit()
+                word.Quit()
+            except Exception:
+                pass
+        pendientes = [(n, o, d) for n, o, d in pendientes if not os.path.exists(d)]
+        if pendientes:
+            print(f"[PDF] Intento {intento}: {len(pendientes)} sin PDF; reintentando...")
+
+    fallidos = [(n, errores.get(n, "sin detalle")) for n, _o, _d in pendientes]
+
+    n_docx = sum(
+        1 for f in os.listdir(carpeta_word)
+        if f.lower().endswith(".docx") and not f.startswith("~$")
+    )
+    n_pdf = sum(1 for f in os.listdir(carpeta_pdf) if f.lower().endswith(".pdf"))
+    resumen = f"[PDF] word={n_docx} · pdf={n_pdf}"
+    if fallidos:
+        resumen += f" · fallidos={len(fallidos)}"
+    print(resumen)
+    for nombre, error in fallidos:
+        print(f"  - {nombre}: {error}")
+    if fallidos:
+        ruta_log = os.path.join(os.path.dirname(carpeta_pdf), "pdf_fallidos.txt")
+        with open(ruta_log, "w", encoding="utf-8") as f:
+            for nombre, error in fallidos:
+                f.write(f"{nombre}\t{error}\n")
+        print(f"[PDF] Detalle de fallidos en: {ruta_log}")
+
+    return {"word": n_docx, "pdf": n_pdf, "fallidos": [n for n, _ in fallidos]}
 
 
 def main():
-    conteo, registros_totales, empresas = cargar_datos()
+    df, registros_totales, empresas = cargar_datos()
     universos = cargar_universos()
 
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -574,14 +695,20 @@ def main():
     os.makedirs(carpeta_word, exist_ok=True)
     os.makedirs(carpeta_pdf, exist_ok=True)
 
-    for empresa in empresas:
-        filas = _filas_empresa(conteo, empresa)
-        generar_documento(empresa, filas, registros_totales, universos, carpeta_word)
+    for empresa, df_emp in df.groupby("propietario_name"):
+        if not empresa:
+            continue
+        metricas = metricas_empresa(df_emp)
+        generar_documento(empresa, metricas, registros_totales, universos, carpeta_word)
 
-    convertir_a_pdf(carpeta_word, carpeta_pdf)
+    res = convertir_a_pdf(carpeta_word, carpeta_pdf)
 
     print(f"Se generaron {len(empresas)} documentos en {carpeta}")
+    if res["word"] != res["pdf"]:
+        print(f"[ERROR] Faltan PDFs: word={res['word']} pdf={res['pdf']}")
+        return 1
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

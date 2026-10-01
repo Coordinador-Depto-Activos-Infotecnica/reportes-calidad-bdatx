@@ -1,0 +1,85 @@
+{
+    "id": 0,
+    "ref_id": "string",
+    "name": "string",
+    "description": "string",
+    "status": "string",
+    "tipo_oocc_id": "string",
+    "propietario_id": "string",
+    "decreto_id": "string",
+    "categoria_vu_id": "string",
+    "validacionbbdd": 0,
+    "validacionactivos": 0,
+    "datasheet": {
+        "tapas": {
+            "cantidad": 0,
+            "dimensiones": {
+                "alto": {
+                    "unidad": "string",
+                    "magnitud": 0
+                },
+                "ancho": {
+                    "unidad": "string",
+                    "magnitud": 0
+                },
+                "largo": {
+                    "unidad": "string",
+                    "magnitud": 0
+                }
+            },
+            "materialTapas": "string"
+        },
+        "mallaAcma": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "tipoSuelo": "string",
+        "excavacion": {
+            "tipo": "string",
+            "cantidad": {
+                "unidad": "string",
+                "magnitud": 0
+            }
+        },
+        "hormigonArmado": {
+            "tipo": "string",
+            "cantidad": {
+                "unidad": "string",
+                "magnitud": 0
+            }
+        },
+        "retiroEscombros": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "pesoPernosAnclaje": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "rellenoCompactado": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "ESTADO_CERTIFICACION": {},
+        "enfierraduraarmadura": {
+            "cantidad": {
+                "unidad": "string",
+                "magnitud": 0
+            },
+            "materialEnfierradura": "string"
+        },
+        "cantidadPernosAnclaje": 0,
+        "hormigonEmplantillado": {
+            "tipo": "string",
+            "cantidad": {
+                "unidad": "string",
+                "magnitud": 0
+            }
+        },
+        "longitudPernosAnclaje": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "tipoRellenoCompactado": "string"
+    }
+}

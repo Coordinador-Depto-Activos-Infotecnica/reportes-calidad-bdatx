@@ -1,0 +1,77 @@
+{
+    "id": 0,
+    "ref_id": "string",
+    "name": "string",
+    "description": "string",
+    "status": "string",
+    "nodo_estructura_id": "string",
+    "propietario_id": "string",
+    "decreto_id": "string",
+    "categoria_vu_id": "string",
+    "validacionbbdd": 0,
+    "validacionactivos": 0,
+    "datasheet": {
+        "aislacion": {
+            "distanciaFuga": {
+                "unidad": "string",
+                "magnitud": 0
+            },
+            "tensionRotura": {
+                "unidad": "string",
+                "magnitud": 0
+            },
+            "tipoAislacion": "string",
+            "nivelTensionLaLinea": "string"
+        },
+        "torrePintada": false,
+        "cajaEmpalmeOpgw": false,
+        "cantidadGrampas": 0,
+        "longitudRiendas": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "antiEscalamiento": false,
+        "cantidadTensores": 0,
+        "cantidadEslabones": 0,
+        "cantidadAlargadores": 0,
+        "ferreteriaConductor": {
+            "conjuntoAnclajePara1Conductor": 0,
+            "conjuntoAnclajePara2Conductores": 0,
+            "conjuntoAnclajePara3Conductores": 0,
+            "conjuntoAnclajePara4Conductores": 0,
+            "conjuntoPreformadoParaConductor": 0,
+            "conjuntoAnclajeDoblePara1Conductor": 0,
+            "conjuntoSuspensionEnIPara1Conductor": 0,
+            "conjuntoAnclajeDoblePara2Conductores": 0,
+            "conjuntoAnclajeDoblePara3Conductores": 0,
+            "conjuntoAnclajeDoblePara4Conductores": 0,
+            "conjuntoSuspensionEnIPara2Conductores": 0,
+            "conjuntoSuspensionEnIPara3Conductores": 0,
+            "conjuntoSuspensionEnIPara4Conductores": 0,
+            "conjuntoSuspensionEnVPara2Conductores": 0,
+            "conjuntoSuspensionEnVPara3Conductores": 0,
+            "conjuntoSuspensionEnVPara4Conductores": 0
+        },
+        "platinaPuestaTierra": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "ESTADO_CERTIFICACION": {},
+        "cantidadYugosAnclaje": 0,
+        "claseconjuntoaislacion": {
+            "idClaseSql": 0,
+            "descripcionClaseSql": "string"
+        },
+        "ferreteriaCableGuardia": {
+            "conjuntoAnclajeParaCable": 0,
+            "conjuntoSuspensionParaCable": 0
+        },
+        "cantidadCuernosDescarga": 0,
+        "cantidadPlacasNumeracion": 0,
+        "cantidadAisladoresNormales": 0,
+        "cantidadConjuntosAislacion": 0,
+        "cantidadPeinetasAntiPajaros": 0,
+        "cantidadPlacasPeligroMuerte": 0,
+        "cantidadAisladoresTipoNeblina": 0
+    }
+}

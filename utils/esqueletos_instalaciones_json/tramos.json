@@ -1,0 +1,49 @@
+{
+    "id": 0,
+    "inf_id": 0,
+    "ref_id": "string",
+    "name": "string",
+    "description": "string",
+    "status": "string",
+    "circuito_id": "string",
+    "nodo1_id": "string",
+    "nodo2_id": "string",
+    "propietario_id": "string",
+    "decreto_id": "string",
+    "categoria_vu_id": "string",
+    "servidumbre": [],
+    "validacionbbdd": 0,
+    "validacionactivos": 0,
+    "datasheet": {
+        "tasaFalla": 0,
+        "nivelTension": "string",
+        "reactanciaSc": 0,
+        "reactanciaSp": 0,
+        "longitudTramo": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "resistenciaSc": 0,
+        "resistenciaSp": 0,
+        "susceptanciaSc": 0,
+        "susceptanciaSp": 0,
+        "capacidadMaxima": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "capacidadTermica": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "corrienteNominal": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "ESTADO_CERTIFICACION": {},
+        "corrienteTransitoria": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "fechaEntradaEnOperacion": "string"
+    }
+}

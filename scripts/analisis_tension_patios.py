@@ -14,9 +14,9 @@ a su letra según utils/niveles_de_tension.json. Luego se valida:
    evalúa la primera letra del último token).
 
 Códigos:
-    PATIO_TENSION_NO_IDENTIFICADA  (ADVERTENCIA) - patio sin tensión mapeable.
-    BARRA_TENSION_NO_COINCIDE      (ERROR)       - barra con tensión distinta.
-    PANO_TENSION_NO_COINCIDE       (ERROR)       - paño con letra incorrecta.
+    PATIO_TENSION_NO_IDENTIFICADA - patio sin tensión mapeable.
+    BARRA_TENSION_NO_COINCIDE     - barra con tensión distinta.
+    PANO_TENSION_NO_COINCIDE      - paño con letra incorrecta.
 
 Salidas:
     docs/reporte/analisis_tension_patios.xlsx
@@ -61,19 +61,16 @@ CODIGO_PANO = "PANO_TENSION_NO_COINCIDE"
 CATALOGO = [
     {
         "codigo": CODIGO_PATIO,
-        "severidad": "ADVERTENCIA",
         "aplica_a": "Patio",
         "descripcion": "El nombre del patio no permite identificar un nivel de tensión mapeable al catálogo.",
     },
     {
         "codigo": CODIGO_BARRA,
-        "severidad": "ERROR",
         "aplica_a": "Barra",
         "descripcion": "El nivel de tensión del nombre de la barra no coincide con el del patio.",
     },
     {
         "codigo": CODIGO_PANO,
-        "severidad": "ERROR",
         "aplica_a": "Paño",
         "descripcion": "La letra de nivel de tensión del nombre del paño no coincide con la del patio.",
     },
@@ -260,7 +257,6 @@ def exportar(findings):
     for c in CATALOGO:
         filas_resumen.append({
             "codigo": c["codigo"],
-            "severidad": c["severidad"],
             "aplica_a": c["aplica_a"],
             "descripcion": c["descripcion"],
             "cantidad": int(conteo.get(c["codigo"], 0)),

@@ -1,0 +1,49 @@
+{
+    "id": 0,
+    "inf_id": 0,
+    "ref_id": "string",
+    "name": "string",
+    "description": "string",
+    "status": "string",
+    "nodo_id": "string",
+    "propietario_id": "string",
+    "decreto_id": "string",
+    "categoria_vu_id": "string",
+    "validacionbbdd": 0,
+    "validacionactivos": 0,
+    "datasheet": {
+        "marca": "string",
+        "modelo": "string",
+        "cantidad": 0,
+        "datosPlaca": 0,
+        "inductancia": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "anoFabricacion": 0,
+        "tensionNominal": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "rangoFrecuencia": {
+            "maximo": {
+                "unidad": "string",
+                "magnitud": 0
+            },
+            "minimo": {
+                "unidad": "string",
+                "magnitud": 0
+            }
+        },
+        "corrienteNominal": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "ESTADO_CERTIFICACION": {},
+        "fechaEntradaOperacion": "string",
+        "corrienteCortocircuito": {
+            "unidad": "string",
+            "magnitud": 0
+        }
+    }
+}

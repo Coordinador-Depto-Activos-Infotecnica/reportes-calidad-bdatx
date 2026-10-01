@@ -1,0 +1,41 @@
+{
+    "id": 0,
+    "inf_id": 0,
+    "ref_id": "string",
+    "name": "string",
+    "description": "string",
+    "status": "string",
+    "nodo_id": "string",
+    "propietario_id": "string",
+    "decreto_id": "string",
+    "categoria_vu_id": "string",
+    "estructura_ssee": [],
+    "oocc": [],
+    "validacionbbdd": 0,
+    "validacionactivos": 0,
+    "datasheet": {
+        "marca": "string",
+        "modelo": "string",
+        "cantidad": 0,
+        "tipoFase": 0,
+        "datosPlaca": 0,
+        "numeroSerie": "string",
+        "anoFabricacion": 0,
+        "tensionNominal": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "potenciaReactiva": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "tipoConexionBanco": "string",
+        "ESTADO_CERTIFICACION": {},
+        "fechaEntradaEnOperacion": "string",
+        "reactoresSerieLimitadoresCorriente": 0,
+        "clasebancocondensadoresenderivacion": {
+            "idClaseSql": 0,
+            "descripcionClaseSql": "string"
+        }
+    }
+}

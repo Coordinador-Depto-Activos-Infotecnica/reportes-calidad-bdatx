@@ -1,0 +1,51 @@
+{
+    "id": 0,
+    "ref_id": "string",
+    "name": "string",
+    "description": "string",
+    "status": "string",
+    "nodo1_id": "string",
+    "nodo2_id": "string",
+    "tramo_id": "string",
+    "propietario_id": "string",
+    "decreto_id": "string",
+    "categoria_vu_id": "string",
+    "validacionbbdd": 0,
+    "validacionactivos": 0,
+    "datasheet": {
+        "fibraOptica": false,
+        "cableGuardia": false,
+        "longitudVano": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "tipoConductor": "string",
+        "seccionConductor": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "tipoCableGuardia": "string",
+        "longitudConductor": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "numeroCablesGuardia": 0,
+        "seccionCableGuardia": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "ESTADO_CERTIFICACION": {},
+        "longitudCableGuardia": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "tipoAislacionConductor": "string",
+        "fechaEntradaEnOperacion": "string",
+        "masaPorLongitudConductor": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "numeroConductoresPorFase": 0,
+        "informacionComplementaria": 0
+    }
+}

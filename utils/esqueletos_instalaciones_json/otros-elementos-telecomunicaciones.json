@@ -1,0 +1,24 @@
+{
+    "id": 0,
+    "ref_id": "string",
+    "name": "string",
+    "description": "string",
+    "status": "string",
+    "armario_id": "string",
+    "propietario_id": "string",
+    "decreto_id": "string",
+    "categoria_vu_id": "string",
+    "validacionbbdd": 0,
+    "validacionactivos": 0,
+    "datasheet": {
+        "marca": "string",
+        "modelo": "string",
+        "cantidad": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "tipoElementoPano": "string",
+        "ESTADO_CERTIFICACION": {},
+        "fechaEntradaEnOperacion": "string"
+    }
+}

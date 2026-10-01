@@ -1,0 +1,16 @@
+{
+    "id": 0,
+    "inf_id": 0,
+    "ref_id": "string",
+    "name": "string",
+    "description": "string",
+    "status": "string",
+    "nodo": "string",
+    "propietario_id": "string",
+    "decreto_id": "string",
+    "categoria_vu_id": "string",
+    "datasheet": {
+        "temporal": "string",
+        "ESTADO_CERTIFICACION": {}
+    }
+}

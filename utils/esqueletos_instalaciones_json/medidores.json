@@ -1,0 +1,32 @@
+{
+    "id": 0,
+    "inf_id": 0,
+    "ref_id": "string",
+    "name": "string",
+    "description": "string",
+    "status": "string",
+    "armario_id": "string",
+    "nodo_id": "string",
+    "propietario_id": "string",
+    "decreto_id": "string",
+    "categoria_vu_id": "string",
+    "validacionbbdd": 0,
+    "validacionactivos": 0,
+    "datasheet": {
+        "clase": "string",
+        "marca": "string",
+        "modelo": "string",
+        "cantidad": 0,
+        "numeroMedidor": "string",
+        "anoFabricacion": 0,
+        "tipoTecnologia": "string",
+        "ESTADO_CERTIFICACION": {},
+        "tipoSistemaFacturacion": "string",
+        "clasemedidorfacturacion": {
+            "idClaseSql": 0,
+            "descripcionClaseSql": "string"
+        },
+        "fechaEntradaEnOperacion": "string",
+        "numeroIdentificadorEnPlano": "string"
+    }
+}

@@ -1,0 +1,44 @@
+{
+    "id": 0,
+    "ref_id": "string",
+    "name": "string",
+    "description": "string",
+    "status": "string",
+    "comuna_id": "string",
+    "propietario_id": "string",
+    "decreto_id": "string",
+    "sistema_electrico_id": "string",
+    "categoria_vu_id": "string",
+    "validacionbbdd": 0,
+    "validacionactivos": 0,
+    "datasheet": {
+        "superficie": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "anchoFranja": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "largoFranja": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "tipoTerreno": "string",
+        "tipoServidumbre": "string",
+        "valorAdquisicion": {
+            "valor": 0,
+            "unidadMonetaria": "string"
+        },
+        "superficieUtilizada": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "ESTADO_CERTIFICACION": {},
+        "fechaContratoCompraventa": "string",
+        "listadoPropietariosYElNRolCadaPropiedad": 0,
+        "informeComisionesTasadorasParaCadaPredio": 0,
+        "planoGeneralObrasQueIncluyaElTrazadoLaLineaYElPoligonoCadaPredio": 0,
+        "contratoServidumbreVoluntariaODecretoConcesionParaServidumbreForzosa": 0
+    }
+}

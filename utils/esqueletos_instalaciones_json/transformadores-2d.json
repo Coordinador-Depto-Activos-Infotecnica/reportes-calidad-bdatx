@@ -1,0 +1,81 @@
+{
+    "id": 0,
+    "inf_id": 0,
+    "ref_id": "string",
+    "name": "string",
+    "description": "string",
+    "status": "string",
+    "nodo1_id": "string",
+    "nodo2_id": "string",
+    "propietario_id": "string",
+    "decreto_id": "string",
+    "categoria_vu_id": "string",
+    "estructura_ssee": [],
+    "oocc": [],
+    "validacionbbdd": 0,
+    "validacionactivos": 0,
+    "datasheet": {
+        "paso": 0,
+        "tipo": "string",
+        "marca": "string",
+        "modelo": "string",
+        "tapPasos": 0,
+        "tipoFase": 0,
+        "tapMaximo": 0,
+        "tapMinimo": 0,
+        "tasaFalla": 0,
+        "tipoMovil": false,
+        "datosPlaca": 0,
+        "numeroSerie": "string",
+        "potenciaBase": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "reactanciaSc": 0,
+        "reactanciaSp": 0,
+        "anguloDesfase": "string",
+        "grupoConexion": "string",
+        "resistenciaSc": 0,
+        "resistenciaSp": 0,
+        "tipoAislacion": "string",
+        "volumenAceite": 0,
+        "anoFabricacion": 0,
+        "potenciaMaxima": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "razonTapMaximo": 0,
+        "razonTapMinimo": 0,
+        "tipoTecnologia": "string",
+        "estadoOperativo": "string",
+        "perdidasEnVacio": 0,
+        "tipoCambiadorTap": "string",
+        "numeroEnrrollados": 0,
+        "pesoTransformador": 0,
+        "posicionTapMaximo": 0,
+        "posicionTapMinimo": 0,
+        "tipoTransformador": "string",
+        "potenciaIntermedia": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "ESTADO_CERTIFICACION": {},
+        "perdidasCargaNominal": 0,
+        "potenciaPasoTrifasica": 0,
+        "sistemaContraIncendios": false,
+        "tensionNominalPrimario": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "fechaEntradaEnOperacion": "string",
+        "tensionNominalSecundario": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "tipoSistemaRefrigeracion": "string",
+        "claseSqlTransformadordesfasadormovil": {
+            "idClaseSql": 0,
+            "descripcionClaseSql": "string"
+        }
+    }
+}

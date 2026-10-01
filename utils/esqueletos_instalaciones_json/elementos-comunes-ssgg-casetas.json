@@ -1,0 +1,31 @@
+{
+    "id": 0,
+    "ref_id": "string",
+    "name": "string",
+    "description": "string",
+    "status": "string",
+    "nodo_id": "string",
+    "propietario_id": "string",
+    "decreto_id": "string",
+    "categoria_vu_id": "string",
+    "estructura_ssee": [],
+    "oocc": [],
+    "validacionbbdd": 0,
+    "validacionactivos": 0,
+    "datasheet": {
+        "cantidad": {
+            "unidad": "string",
+            "magnitud": 0
+        },
+        "materialOficina": false,
+        "sistemaVigilancia": false,
+        "ESTADO_CERTIFICACION": {},
+        "sistemaPresurizacion": false,
+        "fechaEntradaEnOperacion": "string",
+        "sistemaAlarmaContraRobo": false,
+        "sistemaAireAcondicionado": false,
+        "antecedentesComplementarios": 0,
+        "sistemaProteccionContraIncendios": false,
+        "planosDetallesMontajeParaAlumbradoCanalizacionesYSistemasPuestaTierra": 0
+    }
+}
