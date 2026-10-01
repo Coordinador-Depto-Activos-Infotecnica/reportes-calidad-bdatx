@@ -8,3 +8,13 @@ __pycache__/
 # Reportes generados
 docs/
 .aider*
+
+# Carpetas que solo existen en main
+bd_errores/
+criterios-revision/
+
+# Archivos sensibles que nunca deben publicarse
+*.key
+*.pem
+credentials.json
+config/secrets.*

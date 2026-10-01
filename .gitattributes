@@ -1,0 +1,3 @@
+# Estos archivos conservan siempre la versión de public en un merge
+.gitignore       merge=ours
+master_bdatx.py  merge=ours
